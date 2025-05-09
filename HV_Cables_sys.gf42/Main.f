@@ -47,8 +47,8 @@
 ! Electrical Node Indices
 
 ! Control Signals
-      INTEGER  fault_type, fault_loc, IT_1
-      INTEGER  IT_2(12), BRK, type1, type2, type3
+      INTEGER  fault_type, IT_1, BRK, fault_loc
+      INTEGER  IT_2(12), type1, type2, type3
       INTEGER  BST_A, BST_B, BST_C
       REAL     I3(4), I2(4), I1(4), I11, I12, I13
       REAL     I14, I21, I22, I23, I24, I31, I32
@@ -65,7 +65,7 @@
       INTEGER ICALL_NO                            ! Module call num
       INTEGER ISTOI, ISTOF, IT_0                  ! Storage Indices
       INTEGER IPGB                                ! Control/Monitoring
-      INTEGER ISUBS, SS(4), IBRCH(4), INODE       ! SS/Node/Branch/Xfmr
+      INTEGER ISUBS, SS(5), IBRCH(5), INODE       ! SS/Node/Branch/Xfmr
 
 
 !---------------------------------------
@@ -95,16 +95,16 @@
       IPGB      = NPGB
       NPGB      = NPGB + 18
       INODE     = NNODE + 2
-      NNODE     = NNODE + 41
+      NNODE     = NNODE + 44
       NCSCS     = NCSCS + 0
       NCSCR     = NCSCR + 0
 
 ! Initialize Subsystem Mapping
 
       ISUBS = NSUBS + 0
-      NSUBS = NSUBS + 4
+      NSUBS = NSUBS + 5
 
-      DO IT_0 = 1,4
+      DO IT_0 = 1,5
          SS(IT_0) = SUBS(ISUBS + IT_0)
       END DO
 
@@ -120,7 +120,10 @@
       NBRCH(SS(3)) = NBRCH(SS(3)) + 6
 
       IBRCH(4)     = NBRCH(SS(4))
-      NBRCH(SS(4)) = NBRCH(SS(4)) + 18
+      NBRCH(SS(4)) = NBRCH(SS(4)) + 12
+
+      IBRCH(5)     = NBRCH(SS(5))
+      NBRCH(SS(5)) = NBRCH(SS(5)) + 6
 !---------------------------------------
 ! Transfers from storage arrays
 !---------------------------------------
@@ -142,10 +145,10 @@
       brk_delay = STOF(ISTOF + 27)
       fault_res = STOF(ISTOF + 28)
       fault_type = STOI(ISTOI + 1)
-      fault_loc = STOI(ISTOI + 2)
-      IT_1     = STOI(ISTOI + 3)
-      BRK      = STOI(ISTOI + 16)
+      IT_1     = STOI(ISTOI + 2)
+      BRK      = STOI(ISTOI + 3)
       brk_time = STOF(ISTOF + 29)
+      fault_loc = STOI(ISTOI + 4)
       type1    = STOI(ISTOI + 17)
       type2    = STOI(ISTOI + 18)
       type3    = STOI(ISTOI + 19)
@@ -171,7 +174,7 @@
 
 ! Array (1:12) quantities...
       DO IT_0 = 1,12
-         IT_2(IT_0) = STOI(ISTOI + 3 + IT_0)
+         IT_2(IT_0) = STOI(ISTOI + 4 + IT_0)
       END DO
 
 
@@ -199,8 +202,8 @@
 
 ! Multiple Run Variables Disabled:
       Rg = 0.2
-      fault_time = 1.0
-      brk_delay = 1.0
+      fault_time = 10.0
+      brk_delay = 10.0
       fault_type = 0
       fault_loc = 0
       fault_res = 0.2
@@ -249,38 +252,36 @@
 
       PGB(IPGB+10) = Rg
 
-! 330:[varrlc] Variable R, L or C  
-      CALL E_VARRLC1_EXE(0 ,SS(3) ,  (IBRCH(3)+6), 0, Rg, 0.0)
-
-! 340:[varrlc] Variable R, L or C  
-      CALL E_VARRLC1_EXE(0 ,SS(3) ,  (IBRCH(3)+5), 0, Rg, 0.0)
-
-! 350:[varrlc] Variable R, L or C  
-      CALL E_VARRLC1_EXE(0 ,SS(3) ,  (IBRCH(3)+4), 0, Rg, 0.0)
-
-! 360:[tfaultn] Timed Fault Logic 
+! 330:[tfaultn] Timed Fault Logic 
 ! Timed fault logic
       IT_1 = 0
       IF ( TIME .GE. fault_time ) IT_1 = 1
       IF ( TIME .GE. (fault_time+11111.0) ) IT_1 = 0
 
-! 370:[varrlc] Variable R, L or C  
-      CALL E_VARRLC1_EXE(0 ,SS(2) ,  (IBRCH(2)+4), 0, Rg, 0.0)
+! 340:[varrlc] Variable R, L or C  
+      CALL E_VARRLC1_EXE(0 ,SS(3) ,  (IBRCH(3)+6), 0, Rg, 0.0)
 
-! 380:[tpflt] Three Phase Fault 
-      CALL E3PHFLT1_EXE(SS(4), (IBRCH(4)+13), (IBRCH(4)+14), (IBRCH(4)+1&
-     &5), (IBRCH(4)+16), (IBRCH(4)+17), (IBRCH(4)+18),0,IT_1,type3,fault&
-     &_res)
-      LVD1_1 = (OPENBR( (IBRCH(4)+13),SS(4)).AND.OPENBR( (IBRCH(4)+14),S&
-     &S(4)).AND.OPENBR( (IBRCH(4)+15),SS(4)).AND.OPENBR( (IBRCH(4)+16),S&
-     &S(4)).AND.OPENBR( (IBRCH(4)+17),SS(4)).AND.OPENBR( (IBRCH(4)+18),S&
-     &S(4)))
+! 350:[varrlc] Variable R, L or C  
+      CALL E_VARRLC1_EXE(0 ,SS(3) ,  (IBRCH(3)+5), 0, Rg, 0.0)
+
+! 360:[varrlc] Variable R, L or C  
+      CALL E_VARRLC1_EXE(0 ,SS(3) ,  (IBRCH(3)+4), 0, Rg, 0.0)
+
+! 370:[tpflt] Three Phase Fault 
+      CALL E3PHFLT1_EXE(SS(5), (IBRCH(5)+1), (IBRCH(5)+2), (IBRCH(5)+3),&
+     & (IBRCH(5)+4), (IBRCH(5)+5), (IBRCH(5)+6),0,IT_1,type3,fault_res)
+      LVD1_1 = (OPENBR( (IBRCH(5)+1),SS(5)).AND.OPENBR( (IBRCH(5)+2),SS(&
+     &5)).AND.OPENBR( (IBRCH(5)+3),SS(5)).AND.OPENBR( (IBRCH(5)+4),SS(5)&
+     &).AND.OPENBR( (IBRCH(5)+5),SS(5)).AND.OPENBR( (IBRCH(5)+6),SS(5)))
       IVD1_1 = E_BtoI(LVD1_1)
       IF(FIRSTSTEP .OR. (IVD1_1 .NE. STORI(NSTORI))) THEN
          CALL PSCAD_AGI2(ICALL_NO,1658766998,1-IVD1_1,"AG1")
          STORI(NSTORI) = IVD1_1
       ENDIF
       NSTORI = NSTORI + 1
+
+! 380:[varrlc] Variable R, L or C  
+      CALL E_VARRLC1_EXE(0 ,SS(2) ,  (IBRCH(2)+4), 0, Rg, 0.0)
 
 ! 390:[varrlc] Variable R, L or C  
       CALL E_VARRLC1_EXE(0 ,SS(2) ,  (IBRCH(2)+5), 0, Rg, 0.0)
@@ -365,10 +366,10 @@
       STOF(ISTOF + 27) = brk_delay
       STOF(ISTOF + 28) = fault_res
       STOI(ISTOI + 1) = fault_type
-      STOI(ISTOI + 2) = fault_loc
-      STOI(ISTOI + 3) = IT_1
-      STOI(ISTOI + 16) = BRK
+      STOI(ISTOI + 2) = IT_1
+      STOI(ISTOI + 3) = BRK
       STOF(ISTOF + 29) = brk_time
+      STOI(ISTOI + 4) = fault_loc
       STOI(ISTOI + 17) = type1
       STOI(ISTOI + 18) = type2
       STOI(ISTOI + 19) = type3
@@ -394,7 +395,7 @@
 
 ! Array (1:12) quantities...
       DO IT_0 = 1,12
-         STOI(ISTOI + 3 + IT_0) = IT_2(IT_0)
+         STOI(ISTOI + 4 + IT_0) = IT_2(IT_0)
       END DO
 
 
@@ -462,7 +463,7 @@
       INTEGER ICALL_NO                            ! Module call num
       INTEGER ISTOL, ISTOI, ISTOF, ISTOC, IT_0    ! Storage Indices
       INTEGER IPGB                                ! Control/Monitoring
-      INTEGER ISUBS, SS(4), IBRCH(4), INODE       ! SS/Node/Branch/Xfmr
+      INTEGER ISUBS, SS(5), IBRCH(5), INODE       ! SS/Node/Branch/Xfmr
 
 
 !---------------------------------------
@@ -488,16 +489,16 @@
       IPGB      = NPGB
       NPGB      = NPGB + 18
       INODE     = NNODE + 2
-      NNODE     = NNODE + 41
+      NNODE     = NNODE + 44
       NCSCS     = NCSCS + 0
       NCSCR     = NCSCR + 0
 
 ! Initialize Subsystem Mapping
 
       ISUBS = NSUBS + 0
-      NSUBS = NSUBS + 4
+      NSUBS = NSUBS + 5
 
-      DO IT_0 = 1,4
+      DO IT_0 = 1,5
          SS(IT_0) = SUBS(ISUBS + IT_0)
       END DO
 
@@ -513,7 +514,10 @@
       NBRCH(SS(3)) = NBRCH(SS(3)) + 6
 
       IBRCH(4)     = NBRCH(SS(4))
-      NBRCH(SS(4)) = NBRCH(SS(4)) + 18
+      NBRCH(SS(4)) = NBRCH(SS(4)) + 12
+
+      IBRCH(5)     = NBRCH(SS(5))
+      NBRCH(SS(5)) = NBRCH(SS(5)) + 6
 !---------------------------------------
 ! Transfers from storage arrays
 !---------------------------------------
@@ -669,7 +673,7 @@
          PGB(IPGB+15+IVD1_1-1) = I1(IVD1_1)
       ENDDO
 
-! 380:[tpflt] Three Phase Fault 
+! 370:[tpflt] Three Phase Fault 
 !
 ! Multi-phase Fault Currents
 !
@@ -761,7 +765,7 @@
 ! Indexing variables
       INTEGER ICALL_NO                            ! Module call num
       INTEGER IT_0                                ! Storage Indices
-      INTEGER ISUBS, SS(4), IBRCH(4), INODE       ! SS/Node/Branch/Xfmr
+      INTEGER ISUBS, SS(5), IBRCH(5), INODE       ! SS/Node/Branch/Xfmr
 
 
 !---------------------------------------
@@ -777,16 +781,16 @@
 ! Increment global storage indices
 
       INODE     = NNODE + 2
-      NNODE     = NNODE + 41
+      NNODE     = NNODE + 44
       NCSCS     = NCSCS + 0
       NCSCR     = NCSCR + 0
 
 ! Initialize Subsystem Mapping
 
       ISUBS = NSUBS + 0
-      NSUBS = NSUBS + 4
+      NSUBS = NSUBS + 5
 
-      DO IT_0 = 1,4
+      DO IT_0 = 1,5
          SS(IT_0) = SUBS(ISUBS + IT_0)
       END DO
 
@@ -802,7 +806,10 @@
       NBRCH(SS(3)) = NBRCH(SS(3)) + 6
 
       IBRCH(4)     = NBRCH(SS(4))
-      NBRCH(SS(4)) = NBRCH(SS(4)) + 18
+      NBRCH(SS(4)) = NBRCH(SS(4)) + 12
+
+      IBRCH(5)     = NBRCH(SS(5))
+      NBRCH(SS(5)) = NBRCH(SS(5)) + 6
 !---------------------------------------
 ! Electrical Node Lookup
 !---------------------------------------
@@ -835,20 +842,20 @@
 
 ! 300:[pgb] Output Channel 'Resistance'
 
-! 330:[varrlc] Variable R, L or C  
+! 340:[varrlc] Variable R, L or C  
       CALL E_VARRLC1_CFG(0 ,SS(3) ,  (IBRCH(3)+6), 0)
 
-! 340:[varrlc] Variable R, L or C  
+! 350:[varrlc] Variable R, L or C  
       CALL E_VARRLC1_CFG(0 ,SS(3) ,  (IBRCH(3)+5), 0)
 
-! 350:[varrlc] Variable R, L or C  
+! 360:[varrlc] Variable R, L or C  
       CALL E_VARRLC1_CFG(0 ,SS(3) ,  (IBRCH(3)+4), 0)
 
-! 370:[varrlc] Variable R, L or C  
-      CALL E_VARRLC1_CFG(0 ,SS(2) ,  (IBRCH(2)+4), 0)
-
-! 380:[tpflt] Three Phase Fault 
+! 370:[tpflt] Three Phase Fault 
       CALL E3PHFLT1_CFG(1000000.0,0.0)
+
+! 380:[varrlc] Variable R, L or C  
+      CALL E_VARRLC1_CFG(0 ,SS(2) ,  (IBRCH(2)+4), 0)
 
 ! 390:[varrlc] Variable R, L or C  
       CALL E_VARRLC1_CFG(0 ,SS(2) ,  (IBRCH(2)+5), 0)
@@ -917,7 +924,7 @@
 ! Indexing variables
       INTEGER ICALL_NO                            ! Module call num
       INTEGER IT_0                                ! Storage Indices
-      INTEGER ISUBS, SS(4), IBRCH(4), INODE       ! SS/Node/Branch/Xfmr
+      INTEGER ISUBS, SS(5), IBRCH(5), INODE       ! SS/Node/Branch/Xfmr
 
 
 !---------------------------------------
@@ -933,16 +940,16 @@
 ! Increment global storage indices
 
       INODE     = NNODE + 2
-      NNODE     = NNODE + 41
+      NNODE     = NNODE + 44
       NCSCS     = NCSCS + 0
       NCSCR     = NCSCR + 0
 
 ! Initialize Subsystem Mapping
 
       ISUBS = NSUBS + 0
-      NSUBS = NSUBS + 4
+      NSUBS = NSUBS + 5
 
-      DO IT_0 = 1,4
+      DO IT_0 = 1,5
          SS(IT_0) = SUBS(ISUBS + IT_0)
       END DO
 
@@ -958,7 +965,10 @@
       NBRCH(SS(3)) = NBRCH(SS(3)) + 6
 
       IBRCH(4)     = NBRCH(SS(4))
-      NBRCH(SS(4)) = NBRCH(SS(4)) + 18
+      NBRCH(SS(4)) = NBRCH(SS(4)) + 12
+
+      IBRCH(5)     = NBRCH(SS(5))
+      NBRCH(SS(5)) = NBRCH(SS(5)) + 6
 !---------------------------------------
 ! Electrical Node Lookup
 !---------------------------------------

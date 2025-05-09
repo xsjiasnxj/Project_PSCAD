@@ -21,7 +21,7 @@
     <param name="Warn" value="0" />
     <param name="Check" value="0" />
     <param name="description" value="" />
-    <param name="revisor" value="刘明炜, 1744882033" />
+    <param name="revisor" value="刘明炜, 1744899233" />
     <param name="labels" value="" />
     <param name="startup_filename" value="D:\liumingwei\Documents\PSCAD\Project_0417\HV_Cables_sys.gf42\HV_Cables_sys.snp" />
   </paramlist>
@@ -1459,7 +1459,7 @@
         </Wire>
       </schematic>
     </Definition>
-    <Definition classid="UserCmpDefn" name="Main" group="" url="" version="" build="" crc="76572504" instances="1" key="" view="false" date="1744880408" id="411448843">
+    <Definition classid="UserCmpDefn" name="Main" group="" url="" version="" build="" crc="117466575" instances="1" key="" view="false" date="1744880408" id="411448843">
       <paramlist name="">
         <param name="Description" value="" />
       </paramlist>
@@ -2664,7 +2664,7 @@ Shaeth is connected to the ground via 1 mohm resister. Alternatively sheath can 
             <param name="IType6" value="1" />
             <param name="V1Label" value="Resistance" />
             <param name="V2Label" value="Time" />
-            <param name="ENAB" value="1" />
+            <param name="ENAB" value="0" />
             <param name="V3Label" value="Time" />
             <param name="V4Label" value="Type" />
             <param name="V5Label" value="Type" />
@@ -3506,7 +3506,7 @@ Breaker
   </List>
   <paramlist name="Libs" />
   <hierarchy>
-    <call link="1395132063" name="HV_Cables_sys:Station" z="-1" view="false" instance="0">
+    <call link="1456956055" name="HV_Cables_sys:Station" z="-1" view="false" instance="0">
       <call link="1353776320" name="HV_Cables_sys:Main" z="-1" view="true" instance="0">
         <call link="1346333537" name="HV_Cables_sys:Cable_1" z="-1" view="false" instance="0" />
         <call link="1803023126" name="HV_Cables_sys:Cable_1" z="-1" view="false" instance="1" />

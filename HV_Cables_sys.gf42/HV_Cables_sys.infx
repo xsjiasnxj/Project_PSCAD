@@ -1,6 +1,6 @@
-<Output device="EMTDC" version="2010" date="2025/05/09" time="14:12:00.000000">
+<Output device="EMTDC" version="2010" date="2025/05/09" time="14:39:23.000000">
   <Domain name="Time" unit="s" mult="0.0" skew="0.0">
-    <Sample rate="200.0" end="50" />
+    <Sample rate="1000.0" end="250" />
   </Domain>
   <List classid="Analog">
     <Analog name="Main(0):I3" index="0" id="2132857279:0" label="" dim="4" unit="" min="-2.0" max="2.0" />
