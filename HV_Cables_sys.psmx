@@ -2,11 +2,9 @@
   <messagelist>
     <message status="normal" label="build" groupid="100006">
       <User scope="HV_Cables_sys" name="Main" status="normal" link="1353776320" /><![CDATA[Generating network and source code 'D:\liumingwei\Documents\PSCAD\Project_PSCAD\HV_Cables_sys.gf42\Main.f'.]]></message>
-    <message status="warning" label="build" groupid="205001">
-      <User scope="HV_Cables_sys" name="master:tpflt" status="warning" link="1658766998" /><![CDATA[Suspicious floating terminal at node 'NT_41'.]]></message>
     <message status="normal" label="build" scope="HV_Cables_sys" groupid="100006"><![CDATA[Generating 'D:\liumingwei\Documents\PSCAD\Project_PSCAD\HV_Cables_sys.gf42\HV_Cables_sys.map'.]]></message>
     <message status="normal" label="build" scope="HV_Cables_sys" groupid="100014"><![CDATA[The total number of live nodes: 21]]></message>
-    <message status="normal" label="build" scope="HV_Cables_sys" groupid="400000"><![CDATA[Time for Compile: 141ms  Make: 0ms]]></message>
+    <message status="normal" label="build" scope="HV_Cables_sys" groupid="400000"><![CDATA[Time for Compile: 94ms  Make: 16ms]]></message>
     <message status="normal" label="build" scope="HV_Cables_sys" groupid="100015"><![CDATA[Will execute (1): call F:\PSCAD\gfortran\bin\gf42vars.bat]]></message>
     <message status="normal" label="build" scope="HV_Cables_sys" groupid="100015"><![CDATA[Will execute (1): call "F:\PSCAD\gfortran\bin\gf42vars.bat"]]></message>
     <message status="normal" label="build" scope="HV_Cables_sys" groupid="100015"><![CDATA[Will execute (2): make -f HV_Cables_sys.mak]]></message>
@@ -15,22 +13,22 @@
     <message status="normal" label="build" scope="HV_Cables_sys" groupid="0"><![CDATA[D:\liumingwei\Documents\PSCAD\Project_PSCAD\HV_Cables_sys.gf42>call "F:\PSCAD\gfortran\bin\gf42vars.bat" ]]></message>
     <message status="normal" label="build" scope="HV_Cables_sys" groupid="100004"><![CDATA[Compiling 'Main.f' into object code.]]></message>
     <message status="normal" label="build" scope="HV_Cables_sys" groupid="100012"><![CDATA[Linking objects and libraries into binary 'HV_Cables_sys.exe']]></message>
-    <message status="normal" label="build" scope="HV_Cables_sys" groupid="400000"><![CDATA[Solve Time = 0ms]]></message>
+    <message status="normal" label="build" scope="HV_Cables_sys" groupid="400000"><![CDATA[Solve Time = 47ms]]></message>
   </messagelist>
   <ViewContext>
     <Window defn="HV_Cables_sys:Main" call="0" />
   </ViewContext>
   <List classid="View">
-    <View name="Main" zoomlevel="6" scrollx="544" scrolly="362" />
+    <View name="Main" zoomlevel="6" scrollx="1116" scrolly="327" />
     <View name="Cable_1" zoomlevel="5" scrollx="0" scrolly="117" />
     <View name="Cable_2" zoomlevel="5" scrollx="0" scrolly="90" />
     <View name="Cable_4" zoomlevel="5" scrollx="0" scrolly="90" />
     <View name="Station" zoomlevel="7" scrollx="0" scrolly="0" />
   </List>
   <Catalog count="0" />
-  <Output device="EMTDC" version="2010" date="2025/05/09" time="14:39:23.000000">
+  <Output device="EMTDC" version="2010" date="2025/05/09" time="15:15:30.000000">
     <Domain name="Time" unit="s" mult="0.0" skew="0.0">
-      <Sample rate="1000.0" end="250" />
+      <Sample rate="1000.0" end="150" />
     </Domain>
     <List classid="Analog">
       <Analog name="Main(0):I3" index="0" id="2132857279:0" label="" dim="4" unit="" min="-2.0" max="2.0" />
