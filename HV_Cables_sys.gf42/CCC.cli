@@ -1,0 +1,94 @@
+Cable Summary:
+   {
+   Cable Name = CCC
+   Cable Length = 1.0
+   Steady State Frequency = 50.0
+   }
+! This should be in a section called TLINE-INPUT-DATA
+Frequency Dep. (Phase) Model Options:
+   {
+   Interpolate Travel Times = 1
+   Infinite Line Length = 0
+   Curve Fitting Start Frequency = 0.5
+   Curve Fitting End Frequency = 1000000.0
+   Total Number of Frequency Increments = 100
+   Maximum # of Poles for Surge Admittance Fit = 20
+   Maximum # of Poles for Attenuation Constant Fit = 20
+   Maximum Fitting Error (%) for Surge Admittance = 0.2
+   Maximum Fitting Error (%) for Attenuation Constant = 0.2
+   Maximum Residue/Pole Ratio Tolerance = 100.0
+   Weighting Factor 1 = 1.0
+   Weighting Factor 2 = 1000.0
+   Weighting Factor 3 = 1.0
+   Write Detailed Output Files = 0
+   }
+ Coax Cable:
+   {
+   Cable Number = 1
+   P1 = 0.0 1.0
+   Layers = 3
+   Ground Last Layer = 0
+   Conductor Inner Radius = 0.0
+   Conductor Outer Radius = 0.022
+   Conductor Resistivity = 1.68e-08
+   Conductor Permeability = 1.0
+   Insulator 1 Outer Radius = 0.0395
+   Insulator 1 Relative Permittivity = 4.1
+   Insulator 1 Relative Permeability = 1.0
+   Sheath Outer Radius = 0.0447
+   Sheath Resistivity = 2.73e-08
+   Sheath Permeability = 1.0
+   Insulator 2 Outer Radius = 0.0498
+   Insulator 2 Relative Permittivity = 2.3
+   Insulator 2 Relative Permeability = 1.0
+   }
+! This should be in a section called TLINE-INPUT-DATA
+Line Constants Ground Data:
+   {
+   Ground Resistivity Type = 0
+   GroundResistivity = 100.0
+   GroundPermeability = 1.0
+   EarthImpedanceFormula = 0
+   EarthUImpedanceFormula = 2
+   EarthMImpedanceFormula = 2
+   }
+ Coax Cable:
+   {
+   Cable Number = 2
+   P1 = 0.3 1.0
+   Layers = 3
+   Ground Last Layer = 0
+   Conductor Inner Radius = 0.0
+   Conductor Outer Radius = 0.022
+   Conductor Resistivity = 1.68e-08
+   Conductor Permeability = 1.0
+   Insulator 1 Outer Radius = 0.0395
+   Insulator 1 Relative Permittivity = 4.1
+   Insulator 1 Relative Permeability = 1.0
+   Sheath Outer Radius = 0.0447
+   Sheath Resistivity = 2.73e-08
+   Sheath Permeability = 1.0
+   Insulator 2 Outer Radius = 0.0498
+   Insulator 2 Relative Permittivity = 2.3
+   Insulator 2 Relative Permeability = 1.0
+   }
+ Coax Cable:
+   {
+   Cable Number = 3
+   P1 = 0.6 1.0
+   Layers = 3
+   Ground Last Layer = 0
+   Conductor Inner Radius = 0.0
+   Conductor Outer Radius = 0.022
+   Conductor Resistivity = 1.68e-08
+   Conductor Permeability = 1.0
+   Insulator 1 Outer Radius = 0.0395
+   Insulator 1 Relative Permittivity = 4.1
+   Insulator 1 Relative Permeability = 1.0
+   Sheath Outer Radius = 0.0447
+   Sheath Resistivity = 2.73e-08
+   Sheath Permeability = 1.0
+   Insulator 2 Outer Radius = 0.0498
+   Insulator 2 Relative Permittivity = 2.3
+   Insulator 2 Relative Permeability = 1.0
+   }

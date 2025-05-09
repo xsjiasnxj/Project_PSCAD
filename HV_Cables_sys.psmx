@@ -1,0 +1,49 @@
+<Meta name="HV_Cables_sys">
+  <messagelist>
+    <message status="normal" label="build" scope="HV_Cables_sys" groupid="100006"><![CDATA[Generating 'D:\liumingwei\Documents\PSCAD\Project_0417\HV_Cables_sys.gf42\HV_Cables_sys.map'.]]></message>
+    <message status="normal" label="build" scope="HV_Cables_sys" groupid="100014"><![CDATA[The total number of live nodes: 21]]></message>
+    <message status="normal" label="build" scope="HV_Cables_sys" groupid="400000"><![CDATA[Time for Compile: 0ms  Make: 16ms]]></message>
+    <message status="normal" label="build" scope="HV_Cables_sys" groupid="100015"><![CDATA[Will execute (1): call F:\PSCAD\gfortran\bin\gf42vars.bat]]></message>
+    <message status="normal" label="build" scope="HV_Cables_sys" groupid="100015"><![CDATA[Will execute (1): call "F:\PSCAD\gfortran\bin\gf42vars.bat"]]></message>
+    <message status="normal" label="build" scope="HV_Cables_sys" groupid="100015"><![CDATA[Will execute (2): make -f HV_Cables_sys.mak]]></message>
+    <message status="normal" label="build" scope="HV_Cables_sys" groupid="100015"><![CDATA[Will execute (2): "D:\liumingwei\Documents\PSCAD\Project_0417\HV_Cables_sys.gf42\HV_Cables_sys.mak.bat"]]></message>
+    <message status="normal" label="build" scope="HV_Cables_sys" groupid="100005"><![CDATA[Creating EMTDC executable...]]></message>
+    <message status="normal" label="build" scope="HV_Cables_sys" groupid="0"><![CDATA[D:\liumingwei\Documents\PSCAD\Project_0417\HV_Cables_sys.gf42>call "F:\PSCAD\gfortran\bin\gf42vars.bat" ]]></message>
+    <message status="normal" label="build" scope="HV_Cables_sys" groupid="100012"><![CDATA[Linking objects and libraries into binary 'HV_Cables_sys.exe']]></message>
+    <message status="normal" label="build" scope="HV_Cables_sys" groupid="400000"><![CDATA[Solve Time = 109ms]]></message>
+    <message status="warning" label="runtime" scope="HV_Cables_sys" groupid="200009"><![CDATA[Namespace 'HV_Cables_sys' has been modified since the snapshot file
+'D:\liumingwei\Documents\PSCAD\Project_0417\HV_Cables_sys.gf42\HV_Cables_sys.snp' was created.
+This may affect the simulation results.]]></message>
+    <message status="error" label="runtime" scope="HV_Cables_sys" groupid="300008"><![CDATA[Process has been terminated by user.]]></message>
+    <message status="warning" label="runtime" scope="HV_Cables_sys" groupid="200009"><![CDATA[Simulation ending on user request.]]></message>
+    <message status="warning" label="runtime" scope="HV_Cables_sys" groupid="200009"><![CDATA[ WARNING: PSCAD aborted EMTDC on run           1  of           1]]></message>
+  </messagelist>
+  <ViewContext>
+    <Window defn="HV_Cables_sys:Main" call="0" />
+  </ViewContext>
+  <List classid="View">
+    <View name="Main" zoomlevel="6" scrollx="0" scrolly="88" />
+    <View name="Cable_1" zoomlevel="5" scrollx="0" scrolly="117" />
+    <View name="Cable_2" zoomlevel="5" scrollx="0" scrolly="90" />
+    <View name="Cable_4" zoomlevel="5" scrollx="0" scrolly="90" />
+    <View name="Station" zoomlevel="7" scrollx="0" scrolly="0" />
+  </List>
+  <Output device="EMTDC" version="2010" date="2025/04/17" time="17:20:58.000000">
+    <Domain name="Time" unit="s" mult="0.0" skew="0.0">
+      <Sample rate="200.0" end="50" />
+    </Domain>
+    <List classid="Analog">
+      <Analog name="Main(0):I3" index="0" id="2132857279:0" label="" dim="4" unit="" min="-2.0" max="2.0" />
+      <Analog name="Main(0):fault_time" index="4" id="1980102405:0" label="" dim="1" unit="s" min="0.5" max="0.52" />
+      <Analog name="Main(0):brk_delay" index="5" id="1737414921:0" label="" dim="1" unit="s" min="0.5" max="0.52" />
+      <Analog name="Main(0):fault_type" index="6" id="665107231:0" label="" dim="1" unit="" min="0" max="10" />
+      <Analog name="Main(0):Location" index="7" id="221410480:0" label="" dim="1" unit="" min="0" max="10" />
+      <Analog name="Main(0):fault_res" index="8" id="1373128288:0" label="" dim="1" unit="ohm" min="0.5" max="0.52" />
+      <Analog name="Main(0):Resistance" index="9" id="1698922523:0" label="" dim="1" unit="ohm" min="0.5" max="0.52" />
+      <Analog name="Main(0):I2" index="10" id="1395211711:0" label="" dim="4" unit="" min="-2.0" max="2.0" />
+      <Analog name="Main(0):I1" index="14" id="224325455:0" label="" dim="4" unit="" min="-2.0" max="2.0" />
+    </List>
+    <List classid="Digital" />
+  </Output>
+  <Catalog count="0" />
+</Meta>
