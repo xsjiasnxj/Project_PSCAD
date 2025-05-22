@@ -1,34 +1,33 @@
 <Meta name="HV_Cables_sys">
   <messagelist>
-    <message status="normal" label="build" groupid="100006">
-      <User scope="HV_Cables_sys" name="Main" status="normal" link="1353776320" /><![CDATA[Generating network and source code 'D:\liumingwei\Documents\PSCAD\Project_PSCAD\HV_Cables_sys.gf42\Main.f'.]]></message>
     <message status="normal" label="build" scope="HV_Cables_sys" groupid="100006"><![CDATA[Generating 'D:\liumingwei\Documents\PSCAD\Project_PSCAD\HV_Cables_sys.gf42\HV_Cables_sys.map'.]]></message>
     <message status="normal" label="build" scope="HV_Cables_sys" groupid="100014"><![CDATA[The total number of live nodes: 21]]></message>
-    <message status="normal" label="build" scope="HV_Cables_sys" groupid="400000"><![CDATA[Time for Compile: 94ms  Make: 0ms]]></message>
+    <message status="normal" label="build" scope="HV_Cables_sys" groupid="400000"><![CDATA[Time for Compile: 0ms  Make: 15ms]]></message>
     <message status="normal" label="build" scope="HV_Cables_sys" groupid="100015"><![CDATA[Will execute (1): call F:\PSCAD\gfortran\bin\gf42vars.bat]]></message>
     <message status="normal" label="build" scope="HV_Cables_sys" groupid="100015"><![CDATA[Will execute (1): call "F:\PSCAD\gfortran\bin\gf42vars.bat"]]></message>
     <message status="normal" label="build" scope="HV_Cables_sys" groupid="100015"><![CDATA[Will execute (2): make -f HV_Cables_sys.mak]]></message>
     <message status="normal" label="build" scope="HV_Cables_sys" groupid="100015"><![CDATA[Will execute (2): "D:\liumingwei\Documents\PSCAD\Project_PSCAD\HV_Cables_sys.gf42\HV_Cables_sys.mak.bat"]]></message>
     <message status="normal" label="build" scope="HV_Cables_sys" groupid="100005"><![CDATA[Creating EMTDC executable...]]></message>
     <message status="normal" label="build" scope="HV_Cables_sys" groupid="0"><![CDATA[D:\liumingwei\Documents\PSCAD\Project_PSCAD\HV_Cables_sys.gf42>call "F:\PSCAD\gfortran\bin\gf42vars.bat" ]]></message>
-    <message status="normal" label="build" scope="HV_Cables_sys" groupid="100004"><![CDATA[Compiling 'Main.f' into object code.]]></message>
     <message status="normal" label="build" scope="HV_Cables_sys" groupid="100012"><![CDATA[Linking objects and libraries into binary 'HV_Cables_sys.exe']]></message>
-    <message status="normal" label="build" scope="HV_Cables_sys" groupid="400000"><![CDATA[Solve Time = 47ms]]></message>
+    <message status="normal" label="build" scope="HV_Cables_sys" groupid="400000"><![CDATA[Solve Time = 0ms]]></message>
+    <message status="error" label="runtime" scope="HV_Cables_sys" groupid="300008"><![CDATA[Process has been terminated by user.]]></message>
+    <message status="warning" label="runtime" scope="HV_Cables_sys" groupid="200009"><![CDATA[Simulation ending on user request.]]></message>
   </messagelist>
   <ViewContext>
     <Window defn="HV_Cables_sys:Main" call="0" />
   </ViewContext>
   <List classid="View">
-    <View name="Main" zoomlevel="6" scrollx="558" scrolly="68" />
+    <View name="Main" zoomlevel="5" scrollx="812" scrolly="48" />
     <View name="Cable_1" zoomlevel="5" scrollx="0" scrolly="142" />
     <View name="Cable_2" zoomlevel="5" scrollx="0" scrolly="90" />
     <View name="Cable_4" zoomlevel="5" scrollx="0" scrolly="90" />
     <View name="Station" zoomlevel="7" scrollx="0" scrolly="0" />
   </List>
   <Catalog count="0" />
-  <Output device="EMTDC" version="2010" date="2025/05/09" time="15:42:07.000000">
+  <Output device="EMTDC" version="2010" date="2025/05/22" time="23:31:15.000000">
     <Domain name="Time" unit="s" mult="0.0" skew="0.0">
-      <Sample rate="1000.0" end="150" />
+      <Sample rate="1000.0" end="15000" />
     </Domain>
     <List classid="Analog">
       <Analog name="Main(0):I3" index="0" id="2132857279:0" label="" dim="4" unit="" min="-2.0" max="2.0" />
@@ -37,10 +36,14 @@
       <Analog name="Main(0):brk_delay" index="8" id="1737414921:0" label="" dim="1" unit="s" min="0.5" max="0.52" />
       <Analog name="Main(0):fault_type" index="9" id="665107231:0" label="" dim="1" unit="" min="0" max="10" />
       <Analog name="Main(0):Location" index="10" id="221410480:0" label="" dim="1" unit="" min="0" max="10" />
-      <Analog name="Main(0):fault_res" index="11" id="1373128288:0" label="" dim="1" unit="ohm" min="0.5" max="0.52" />
-      <Analog name="Main(0):Resistance" index="12" id="1698922523:0" label="" dim="1" unit="ohm" min="0.5" max="0.52" />
-      <Analog name="Main(0):I2" index="13" id="1395211711:0" label="" dim="4" unit="" min="-2.0" max="2.0" />
-      <Analog name="Main(0):I1" index="17" id="224325455:0" label="" dim="4" unit="" min="-2.0" max="2.0" />
+      <Analog name="Main(0):Pin" index="11" id="1282198945:0" label="" dim="1" unit="" min="-2.0" max="2.0" />
+      <Analog name="Main(0):fault_res" index="12" id="1373128288:0" label="" dim="1" unit="ohm" min="0.5" max="0.52" />
+      <Analog name="Main(0):Pout" index="13" id="296774946:0" label="" dim="1" unit="" min="-2.0" max="2.0" />
+      <Analog name="Main(0):Qin" index="14" id="918919079:0" label="" dim="1" unit="" min="-2.0" max="2.0" />
+      <Analog name="Main(0):Qout" index="15" id="151456015:0" label="" dim="1" unit="" min="-2.0" max="2.0" />
+      <Analog name="Main(0):Resistance" index="16" id="1698922523:0" label="" dim="1" unit="ohm" min="0.5" max="0.52" />
+      <Analog name="Main(0):I2" index="17" id="1395211711:0" label="" dim="4" unit="" min="-2.0" max="2.0" />
+      <Analog name="Main(0):I1" index="21" id="224325455:0" label="" dim="4" unit="" min="-2.0" max="2.0" />
     </List>
     <List classid="Digital" />
   </Output>

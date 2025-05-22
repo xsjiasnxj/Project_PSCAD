@@ -1,6 +1,6 @@
-<Output device="EMTDC" version="2010" date="2025/05/22" time="22:35:56.000000">
+<Output device="EMTDC" version="2010" date="2025/05/22" time="23:31:15.000000">
   <Domain name="Time" unit="s" mult="0.0" skew="0.0">
-    <Sample rate="1000.0" end="900" />
+    <Sample rate="1000.0" end="15000" />
   </Domain>
   <List classid="Analog">
     <Analog name="Main(0):I3" index="0" id="2132857279:0" label="" dim="4" unit="" min="-2.0" max="2.0" />
@@ -9,11 +9,14 @@
     <Analog name="Main(0):brk_delay" index="8" id="1737414921:0" label="" dim="1" unit="s" min="0.5" max="0.52" />
     <Analog name="Main(0):fault_type" index="9" id="665107231:0" label="" dim="1" unit="" min="0" max="10" />
     <Analog name="Main(0):Location" index="10" id="221410480:0" label="" dim="1" unit="" min="0" max="10" />
-    <Analog name="Main(0):fault_res" index="11" id="1373128288:0" label="" dim="1" unit="ohm" min="0.5" max="0.52" />
-    <Analog name="Main(0):Itest" index="12" id="1169266040:0" label="" dim="1" unit="" min="-2.0" max="2.0" />
-    <Analog name="Main(0):Resistance" index="13" id="1698922523:0" label="" dim="1" unit="ohm" min="0.5" max="0.52" />
-    <Analog name="Main(0):I2" index="14" id="1395211711:0" label="" dim="4" unit="" min="-2.0" max="2.0" />
-    <Analog name="Main(0):I1" index="18" id="224325455:0" label="" dim="4" unit="" min="-2.0" max="2.0" />
+    <Analog name="Main(0):Pin" index="11" id="1282198945:0" label="" dim="1" unit="" min="-2.0" max="2.0" />
+    <Analog name="Main(0):fault_res" index="12" id="1373128288:0" label="" dim="1" unit="ohm" min="0.5" max="0.52" />
+    <Analog name="Main(0):Pout" index="13" id="296774946:0" label="" dim="1" unit="" min="-2.0" max="2.0" />
+    <Analog name="Main(0):Qin" index="14" id="918919079:0" label="" dim="1" unit="" min="-2.0" max="2.0" />
+    <Analog name="Main(0):Qout" index="15" id="151456015:0" label="" dim="1" unit="" min="-2.0" max="2.0" />
+    <Analog name="Main(0):Resistance" index="16" id="1698922523:0" label="" dim="1" unit="ohm" min="0.5" max="0.52" />
+    <Analog name="Main(0):I2" index="17" id="1395211711:0" label="" dim="4" unit="" min="-2.0" max="2.0" />
+    <Analog name="Main(0):I1" index="21" id="224325455:0" label="" dim="4" unit="" min="-2.0" max="2.0" />
   </List>
   <List classid="Digital" />
 </Output>

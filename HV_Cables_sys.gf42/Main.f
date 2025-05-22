@@ -55,8 +55,8 @@
       REAL     I14, I21, I22, I23, I24, I31, I32
       REAL     I33, I34, Rg, fault_time
       REAL     brk_delay, fault_res, brk_time
-      REAL     IL(3), Itest, US(3), IS(3), US_rms
-      REAL     UL(3)
+      REAL     IL(3), Pin, Pout, Qin, Qout, US(3)
+      REAL     IS(3), US_rms, UL(3)
 
 ! Internal Variables
       LOGICAL  LVD1_1
@@ -67,7 +67,7 @@
       INTEGER ICALL_NO                            ! Module call num
       INTEGER ISTOI, ISTOF, IT_0                  ! Storage Indices
       INTEGER IPGB                                ! Control/Monitoring
-      INTEGER ISUBS, SS(5), IBRCH(5), INODE       ! SS/Node/Branch/Xfmr
+      INTEGER ISUBS, SS(4), IBRCH(4), INODE       ! SS/Node/Branch/Xfmr
 
 
 !---------------------------------------
@@ -93,20 +93,20 @@
       ISTOI     = NSTOI
       NSTOI     = NSTOI + 27
       ISTOF     = NSTOF
-      NSTOF     = NSTOF + 43
+      NSTOF     = NSTOF + 46
       IPGB      = NPGB
-      NPGB      = NPGB + 22
+      NPGB      = NPGB + 25
       INODE     = NNODE + 2
-      NNODE     = NNODE + 54
+      NNODE     = NNODE + 41
       NCSCS     = NCSCS + 0
       NCSCR     = NCSCR + 0
 
 ! Initialize Subsystem Mapping
 
       ISUBS = NSUBS + 0
-      NSUBS = NSUBS + 5
+      NSUBS = NSUBS + 4
 
-      DO IT_0 = 1,5
+      DO IT_0 = 1,4
          SS(IT_0) = SUBS(ISUBS + IT_0)
       END DO
 
@@ -123,9 +123,6 @@
 
       IBRCH(4)     = NBRCH(SS(4))
       NBRCH(SS(4)) = NBRCH(SS(4)) + 18
-
-      IBRCH(5)     = NBRCH(SS(5))
-      NBRCH(SS(5)) = NBRCH(SS(5)) + 2
 !---------------------------------------
 ! Transfers from storage arrays
 !---------------------------------------
@@ -156,11 +153,14 @@
       IT_4     = STOI(ISTOI + 19)
       type2    = STOI(ISTOI + 20)
       type3    = STOI(ISTOI + 21)
-      Itest    = STOF(ISTOF + 33)
+      Pin      = STOF(ISTOF + 33)
+      Pout     = STOF(ISTOF + 34)
+      Qin      = STOF(ISTOF + 35)
+      Qout     = STOF(ISTOF + 36)
       IT_5     = STOI(ISTOI + 22)
       IT_6     = STOI(ISTOI + 23)
       IT_7     = STOI(ISTOI + 24)
-      US_rms   = STOF(ISTOF + 40)
+      US_rms   = STOF(ISTOF + 43)
       BST_A    = STOI(ISTOI + 25)
       BST_B    = STOI(ISTOI + 26)
       BST_C    = STOI(ISTOI + 27)
@@ -168,9 +168,9 @@
 ! Array (1:3) quantities...
       DO IT_0 = 1,3
          IL(IT_0) = STOF(ISTOF + 29 + IT_0)
-         US(IT_0) = STOF(ISTOF + 33 + IT_0)
-         IS(IT_0) = STOF(ISTOF + 36 + IT_0)
-         UL(IT_0) = STOF(ISTOF + 40 + IT_0)
+         US(IT_0) = STOF(ISTOF + 36 + IT_0)
+         IS(IT_0) = STOF(ISTOF + 39 + IT_0)
+         UL(IT_0) = STOF(ISTOF + 43 + IT_0)
       END DO
 
 ! Array (1:4) quantities...
@@ -264,27 +264,27 @@
 
       PGB(IPGB+11) = REAL(fault_loc)
 
-! 320:[pgb] Output Channel 'fault_res'
+! 330:[pgb] Output Channel 'fault_res'
 
-      PGB(IPGB+12) = fault_res
+      PGB(IPGB+13) = fault_res
 
-! 330:[sumjct] Summing/Differencing Junctions 
+! 340:[sumjct] Summing/Differencing Junctions 
       brk_time = + fault_time + brk_delay
 
-! 360:[datatap] Scalar/Array Tap 
+! 380:[datatap] Scalar/Array Tap 
       IT_5 = IT_2(1)
 
-! 370:[pgb] Output Channel 'Resistance'
+! 390:[pgb] Output Channel 'Resistance'
 
-      PGB(IPGB+14) = Rg
+      PGB(IPGB+17) = Rg
 
-! 400:[tfaultn] Timed Fault Logic 
+! 420:[tfaultn] Timed Fault Logic 
 ! Timed fault logic
       IT_4 = 0
       IF ( TIME .GE. fault_time ) IT_4 = 1
       IF ( TIME .GE. (fault_time+11111.0) ) IT_4 = 0
 
-! 410:[tpflt] Three Phase Fault 
+! 430:[tpflt] Three Phase Fault 
       CALL E3PHFLT1_EXE(SS(3), (IBRCH(3)+7), (IBRCH(3)+8), (IBRCH(3)+9),&
      & (IBRCH(3)+10), (IBRCH(3)+11), (IBRCH(3)+12),0,IT_4,type2,fault_re&
      &s)
@@ -299,7 +299,7 @@
       ENDIF
       NSTORI = NSTORI + 1
 
-! 420:[tpflt] Three Phase Fault 
+! 440:[tpflt] Three Phase Fault 
       CALL E3PHFLT1_EXE(SS(2), (IBRCH(2)+7), (IBRCH(2)+8), (IBRCH(2)+9),&
      & (IBRCH(2)+10), (IBRCH(2)+11), (IBRCH(2)+12),0,IT_3,type1,fault_re&
      &s)
@@ -314,22 +314,22 @@
       ENDIF
       NSTORI = NSTORI + 1
 
-! 430:[tfaultn] Timed Fault Logic 
+! 450:[tfaultn] Timed Fault Logic 
 ! Timed fault logic
       IT_1 = 0
       IF ( TIME .GE. fault_time ) IT_1 = 1
       IF ( TIME .GE. (fault_time+11111.0) ) IT_1 = 0
 
-! 440:[varrlc] Variable R, L or C  
+! 460:[varrlc] Variable R, L or C  
       CALL E_VARRLC1_EXE(0 ,SS(3) ,  (IBRCH(3)+6), 0, Rg, 0.0)
 
-! 450:[varrlc] Variable R, L or C  
+! 470:[varrlc] Variable R, L or C  
       CALL E_VARRLC1_EXE(0 ,SS(3) ,  (IBRCH(3)+5), 0, Rg, 0.0)
 
-! 460:[varrlc] Variable R, L or C  
+! 480:[varrlc] Variable R, L or C  
       CALL E_VARRLC1_EXE(0 ,SS(3) ,  (IBRCH(3)+4), 0, Rg, 0.0)
 
-! 470:[tpflt] Three Phase Fault 
+! 490:[tpflt] Three Phase Fault 
       CALL E3PHFLT1_EXE(SS(4), (IBRCH(4)+13), (IBRCH(4)+14), (IBRCH(4)+1&
      &5), (IBRCH(4)+16), (IBRCH(4)+17), (IBRCH(4)+18),0,IT_1,type3,fault&
      &_res)
@@ -344,16 +344,16 @@
       ENDIF
       NSTORI = NSTORI + 1
 
-! 480:[varrlc] Variable R, L or C  
+! 500:[varrlc] Variable R, L or C  
       CALL E_VARRLC1_EXE(0 ,SS(2) ,  (IBRCH(2)+4), 0, Rg, 0.0)
 
-! 490:[varrlc] Variable R, L or C  
+! 510:[varrlc] Variable R, L or C  
       CALL E_VARRLC1_EXE(0 ,SS(2) ,  (IBRCH(2)+5), 0, Rg, 0.0)
 
-! 500:[varrlc] Variable R, L or C  
+! 520:[varrlc] Variable R, L or C  
       CALL E_VARRLC1_EXE(0 ,SS(2) ,  (IBRCH(2)+6), 0, Rg, 0.0)
 
-! 510:[tbreakn] Timed Breaker Logic 
+! 530:[tbreakn] Timed Breaker Logic 
 ! Timed breaker logic
       IF ( TIMEZERO ) THEN
          BRK = 0
@@ -362,7 +362,7 @@
          IF ( TIME .GE. brk_time ) BRK = (1-0)
       ENDIF
 
-! 520:[breaker3] 3 Phase Breaker 'BRK'
+! 540:[breaker3] 3 Phase Breaker 'BRK'
       IVD1_4 = NSTORI
       NSTORI = NSTORI + 3
 ! Three Phase Breaker
@@ -409,11 +409,6 @@
       CALL LOAD3P1_EXE(SS(4), (IBRCH(4)+7), (IBRCH(4)+8), (IBRCH(4)+9), &
      &(IBRCH(4)+10), (IBRCH(4)+11), (IBRCH(4)+12))
 
-! 1:[battery] Generic battery model 'Bat1'
-      IVD1_1=NSTORF
-      CALL COMPONENT_ID(ICALL_NO,1121419505)
-      CALL BATTERYCOEFF1_EXE(SS(5), (IBRCH(5)+1))
-
 !---------------------------------------
 ! Feedbacks and transfers to storage
 !---------------------------------------
@@ -444,11 +439,14 @@
       STOI(ISTOI + 19) = IT_4
       STOI(ISTOI + 20) = type2
       STOI(ISTOI + 21) = type3
-      STOF(ISTOF + 33) = Itest
+      STOF(ISTOF + 33) = Pin
+      STOF(ISTOF + 34) = Pout
+      STOF(ISTOF + 35) = Qin
+      STOF(ISTOF + 36) = Qout
       STOI(ISTOI + 22) = IT_5
       STOI(ISTOI + 23) = IT_6
       STOI(ISTOI + 24) = IT_7
-      STOF(ISTOF + 40) = US_rms
+      STOF(ISTOF + 43) = US_rms
       STOI(ISTOI + 25) = BST_A
       STOI(ISTOI + 26) = BST_B
       STOI(ISTOI + 27) = BST_C
@@ -456,9 +454,9 @@
 ! Array (1:3) quantities...
       DO IT_0 = 1,3
          STOF(ISTOF + 29 + IT_0) = IL(IT_0)
-         STOF(ISTOF + 33 + IT_0) = US(IT_0)
-         STOF(ISTOF + 36 + IT_0) = IS(IT_0)
-         STOF(ISTOF + 40 + IT_0) = UL(IT_0)
+         STOF(ISTOF + 36 + IT_0) = US(IT_0)
+         STOF(ISTOF + 39 + IT_0) = IS(IT_0)
+         STOF(ISTOF + 43 + IT_0) = UL(IT_0)
       END DO
 
 ! Array (1:4) quantities...
@@ -513,6 +511,8 @@
 !---------------------------------------
 
       REAL    EMTDC_VVDC    ! 
+      REAL    P3PH3         ! 
+      REAL    Q3PH3         ! 
       REAL    VM3PH2        ! '3 Phase RMS Voltage Measurement'
       REAL    VBRANCH       ! 
 
@@ -528,8 +528,8 @@
       INTEGER  type1, type2, type3
       REAL     I3(4), I2(4), I1(4), I11, I12, I13
       REAL     I14, I21, I22, I23, I24, I31, I32
-      REAL     I33, I34, IL(3), Itest, US(3)
-      REAL     IS(3), US_rms, UL(3)
+      REAL     I33, I34, IL(3), Pin, Pout, Qin
+      REAL     Qout, US(3), IS(3), US_rms, UL(3)
 
 ! Internal Variables
       INTEGER  IVD1_1
@@ -539,7 +539,7 @@
       INTEGER ICALL_NO                            ! Module call num
       INTEGER ISTOL, ISTOI, ISTOF, ISTOC, IT_0    ! Storage Indices
       INTEGER IPGB                                ! Control/Monitoring
-      INTEGER ISUBS, SS(5), IBRCH(5), INODE       ! SS/Node/Branch/Xfmr
+      INTEGER ISUBS, SS(4), IBRCH(4), INODE       ! SS/Node/Branch/Xfmr
 
 
 !---------------------------------------
@@ -563,18 +563,18 @@
 ! Increment global storage indices
 
       IPGB      = NPGB
-      NPGB      = NPGB + 22
+      NPGB      = NPGB + 25
       INODE     = NNODE + 2
-      NNODE     = NNODE + 54
+      NNODE     = NNODE + 41
       NCSCS     = NCSCS + 0
       NCSCR     = NCSCR + 0
 
 ! Initialize Subsystem Mapping
 
       ISUBS = NSUBS + 0
-      NSUBS = NSUBS + 5
+      NSUBS = NSUBS + 4
 
-      DO IT_0 = 1,5
+      DO IT_0 = 1,4
          SS(IT_0) = SUBS(ISUBS + IT_0)
       END DO
 
@@ -591,9 +591,6 @@
 
       IBRCH(4)     = NBRCH(SS(4))
       NBRCH(SS(4)) = NBRCH(SS(4)) + 18
-
-      IBRCH(5)     = NBRCH(SS(5))
-      NBRCH(SS(5)) = NBRCH(SS(5)) + 2
 !---------------------------------------
 ! Transfers from storage arrays
 !---------------------------------------
@@ -613,15 +610,18 @@
       type1    = STOI(ISTOI + 18)
       type2    = STOI(ISTOI + 20)
       type3    = STOI(ISTOI + 21)
-      Itest    = STOF(ISTOF + 33)
-      US_rms   = STOF(ISTOF + 40)
+      Pin      = STOF(ISTOF + 33)
+      Pout     = STOF(ISTOF + 34)
+      Qin      = STOF(ISTOF + 35)
+      Qout     = STOF(ISTOF + 36)
+      US_rms   = STOF(ISTOF + 43)
 
 ! Array (1:3) quantities...
       DO IT_0 = 1,3
          IL(IT_0) = STOF(ISTOF + 29 + IT_0)
-         US(IT_0) = STOF(ISTOF + 33 + IT_0)
-         IS(IT_0) = STOF(ISTOF + 36 + IT_0)
-         UL(IT_0) = STOF(ISTOF + 40 + IT_0)
+         US(IT_0) = STOF(ISTOF + 36 + IT_0)
+         IS(IT_0) = STOF(ISTOF + 39 + IT_0)
+         UL(IT_0) = STOF(ISTOF + 43 + IT_0)
       END DO
 
 ! Array (1:4) quantities...
@@ -670,6 +670,12 @@
       IS(1) = EMTDC_VVDC(SS(1), NT_1(1), 0)
       IS(2) = EMTDC_VVDC(SS(1), NT_1(2), 0)
       IS(3) = EMTDC_VVDC(SS(1), NT_1(3), 0)
+      RVD1_1 = RTCF(IVD1_1) * P3PH3(SS(1), (IBRCH(1)+4), (IBRCH(1)+5), (&
+     &IBRCH(1)+6),RTCF(IVD1_1+2),0)
+      Pin = RVD1_1
+      RVD1_1 = RTCF(IVD1_1) * Q3PH3(SS(1), (IBRCH(1)+4), (IBRCH(1)+5), (&
+     &IBRCH(1)+6),RTCF(IVD1_1+2),0)
+      Qin = RVD1_1
       RVD1_1 = RTCF(IVD1_1+1) * VM3PH2(SS(1), NT_1(1), NT_1(2), NT_1(3),&
      & RTCF(IVD1_1+2))
       US_rms = RVD1_1
@@ -704,6 +710,12 @@
       IL(1) = EMTDC_VVDC(SS(4), NT_27(1), 0)
       IL(2) = EMTDC_VVDC(SS(4), NT_27(2), 0)
       IL(3) = EMTDC_VVDC(SS(4), NT_27(3), 0)
+      RVD1_1 = RTCF(IVD1_1) * P3PH3(SS(4), (IBRCH(4)+1), (IBRCH(4)+2), (&
+     &IBRCH(4)+3),RTCF(IVD1_1+2),0)
+      Pout = RVD1_1
+      RVD1_1 = RTCF(IVD1_1) * Q3PH3(SS(4), (IBRCH(4)+1), (IBRCH(4)+2), (&
+     &IBRCH(4)+3),RTCF(IVD1_1+2),0)
+      Qout = RVD1_1
 
 ! 110:[ammeter] Current Meter 'I23'
       I23 = ( CBR((IBRCH(3)+1), SS(3)))
@@ -759,44 +771,53 @@
 
       type3 = 0
 
-! 340:[ammeter] Current Meter 'Itest'
-      Itest = ( CBR((IBRCH(5)+2), SS(5)))
+! 320:[pgb] Output Channel 'Pin'
 
-! 350:[pgb] Output Channel 'Itest'
+      PGB(IPGB+12) = Pin
 
-      PGB(IPGB+13) = Itest
+! 350:[pgb] Output Channel 'Pout'
 
-! 380:[pgb] Output Channel 'I2'
+      PGB(IPGB+14) = Pout
+
+! 360:[pgb] Output Channel 'Qin'
+
+      PGB(IPGB+15) = Qin
+
+! 370:[pgb] Output Channel 'Qout'
+
+      PGB(IPGB+16) = Qout
+
+! 400:[pgb] Output Channel 'I2'
 
       DO IVD1_1 = 1, 4
-         PGB(IPGB+15+IVD1_1-1) = I2(IVD1_1)
+         PGB(IPGB+18+IVD1_1-1) = I2(IVD1_1)
       ENDDO
 
-! 390:[pgb] Output Channel 'I1'
+! 410:[pgb] Output Channel 'I1'
 
       DO IVD1_1 = 1, 4
-         PGB(IPGB+19+IVD1_1-1) = I1(IVD1_1)
+         PGB(IPGB+22+IVD1_1-1) = I1(IVD1_1)
       ENDDO
 
-! 410:[tpflt] Three Phase Fault 
+! 430:[tpflt] Three Phase Fault 
 !
 ! Multi-phase Fault Currents
 !
 !
 
-! 420:[tpflt] Three Phase Fault 
+! 440:[tpflt] Three Phase Fault 
 !
 ! Multi-phase Fault Currents
 !
 !
 
-! 470:[tpflt] Three Phase Fault 
+! 490:[tpflt] Three Phase Fault 
 !
 ! Multi-phase Fault Currents
 !
 !
 
-! 520:[breaker3] 3 Phase Breaker 'BRK'
+! 540:[breaker3] 3 Phase Breaker 'BRK'
 ! Three Phase Breaker Currents
       CALL BRK_POWER(SS(1), (IBRCH(1)+10), (IBRCH(1)+11), (IBRCH(1)+12),&
      &0,0,0,IVD1_1,0.02,RVD1_1,RVD1_2)
@@ -820,15 +841,18 @@
       STOI(ISTOI + 18) = type1
       STOI(ISTOI + 20) = type2
       STOI(ISTOI + 21) = type3
-      STOF(ISTOF + 33) = Itest
-      STOF(ISTOF + 40) = US_rms
+      STOF(ISTOF + 33) = Pin
+      STOF(ISTOF + 34) = Pout
+      STOF(ISTOF + 35) = Qin
+      STOF(ISTOF + 36) = Qout
+      STOF(ISTOF + 43) = US_rms
 
 ! Array (1:3) quantities...
       DO IT_0 = 1,3
          STOF(ISTOF + 29 + IT_0) = IL(IT_0)
-         STOF(ISTOF + 33 + IT_0) = US(IT_0)
-         STOF(ISTOF + 36 + IT_0) = IS(IT_0)
-         STOF(ISTOF + 40 + IT_0) = UL(IT_0)
+         STOF(ISTOF + 36 + IT_0) = US(IT_0)
+         STOF(ISTOF + 39 + IT_0) = IS(IT_0)
+         STOF(ISTOF + 43 + IT_0) = UL(IT_0)
       END DO
 
 ! Array (1:4) quantities...
@@ -887,7 +911,7 @@
 ! Indexing variables
       INTEGER ICALL_NO                            ! Module call num
       INTEGER IT_0                                ! Storage Indices
-      INTEGER ISUBS, SS(5), IBRCH(5), INODE       ! SS/Node/Branch/Xfmr
+      INTEGER ISUBS, SS(4), IBRCH(4), INODE       ! SS/Node/Branch/Xfmr
 
 
 !---------------------------------------
@@ -903,16 +927,16 @@
 ! Increment global storage indices
 
       INODE     = NNODE + 2
-      NNODE     = NNODE + 54
+      NNODE     = NNODE + 41
       NCSCS     = NCSCS + 0
       NCSCR     = NCSCR + 0
 
 ! Initialize Subsystem Mapping
 
       ISUBS = NSUBS + 0
-      NSUBS = NSUBS + 5
+      NSUBS = NSUBS + 4
 
-      DO IT_0 = 1,5
+      DO IT_0 = 1,4
          SS(IT_0) = SUBS(ISUBS + IT_0)
       END DO
 
@@ -929,9 +953,6 @@
 
       IBRCH(4)     = NBRCH(SS(4))
       NBRCH(SS(4)) = NBRCH(SS(4)) + 18
-
-      IBRCH(5)     = NBRCH(SS(5))
-      NBRCH(SS(5)) = NBRCH(SS(5)) + 2
 !---------------------------------------
 ! Electrical Node Lookup
 !---------------------------------------
@@ -965,42 +986,42 @@
 
 ! 310:[pgb] Output Channel 'Location'
 
-! 320:[pgb] Output Channel 'fault_res'
+! 330:[pgb] Output Channel 'fault_res'
 
-! 330:[sumjct] Summing/Differencing Junctions 
+! 340:[sumjct] Summing/Differencing Junctions 
 
-! 360:[datatap] Scalar/Array Tap 
+! 380:[datatap] Scalar/Array Tap 
 
-! 370:[pgb] Output Channel 'Resistance'
+! 390:[pgb] Output Channel 'Resistance'
 
-! 410:[tpflt] Three Phase Fault 
+! 430:[tpflt] Three Phase Fault 
       CALL E3PHFLT1_CFG(1000000.0,0.0)
 
-! 420:[tpflt] Three Phase Fault 
+! 440:[tpflt] Three Phase Fault 
       CALL E3PHFLT1_CFG(1000000.0,0.0)
-
-! 440:[varrlc] Variable R, L or C  
-      CALL E_VARRLC1_CFG(0 ,SS(3) ,  (IBRCH(3)+6), 0)
-
-! 450:[varrlc] Variable R, L or C  
-      CALL E_VARRLC1_CFG(0 ,SS(3) ,  (IBRCH(3)+5), 0)
 
 ! 460:[varrlc] Variable R, L or C  
-      CALL E_VARRLC1_CFG(0 ,SS(3) ,  (IBRCH(3)+4), 0)
+      CALL E_VARRLC1_CFG(0 ,SS(3) ,  (IBRCH(3)+6), 0)
 
-! 470:[tpflt] Three Phase Fault 
-      CALL E3PHFLT1_CFG(1000000.0,0.0)
+! 470:[varrlc] Variable R, L or C  
+      CALL E_VARRLC1_CFG(0 ,SS(3) ,  (IBRCH(3)+5), 0)
 
 ! 480:[varrlc] Variable R, L or C  
-      CALL E_VARRLC1_CFG(0 ,SS(2) ,  (IBRCH(2)+4), 0)
+      CALL E_VARRLC1_CFG(0 ,SS(3) ,  (IBRCH(3)+4), 0)
 
-! 490:[varrlc] Variable R, L or C  
-      CALL E_VARRLC1_CFG(0 ,SS(2) ,  (IBRCH(2)+5), 0)
+! 490:[tpflt] Three Phase Fault 
+      CALL E3PHFLT1_CFG(1000000.0,0.0)
 
 ! 500:[varrlc] Variable R, L or C  
+      CALL E_VARRLC1_CFG(0 ,SS(2) ,  (IBRCH(2)+4), 0)
+
+! 510:[varrlc] Variable R, L or C  
+      CALL E_VARRLC1_CFG(0 ,SS(2) ,  (IBRCH(2)+5), 0)
+
+! 520:[varrlc] Variable R, L or C  
       CALL E_VARRLC1_CFG(0 ,SS(2) ,  (IBRCH(2)+6), 0)
 
-! 520:[breaker3] 3 Phase Breaker 'BRK'
+! 540:[breaker3] 3 Phase Breaker 'BRK'
       CALL COMPONENT_ID(ICALL_NO,525947723)
       RTCF(NRTCF) = ABS(0.0)
       NRTCF = NRTCF + 1
@@ -1016,11 +1037,6 @@
 
 ! 1:[fixed_load] Fixed Load 
       CALL LOAD1P1_CFG(179.6292,50.0,200.0,100.0,2.0,2.0,0.0,0.0)
-
-! 1:[battery] Generic battery model 'Bat1'
-      CALL COMPONENT_ID(ICALL_NO,1121419505)
-      CALL BATTERYCOEFF1_CFG(SS(5), (IBRCH(5)+1),0.12,1.15,1.03,0.0065,0&
-     &.95,0.4,100.0,0.005,20.0)
 
       RETURN
       END
@@ -1067,7 +1083,7 @@
 ! Indexing variables
       INTEGER ICALL_NO                            ! Module call num
       INTEGER IT_0                                ! Storage Indices
-      INTEGER ISUBS, SS(5), IBRCH(5), INODE       ! SS/Node/Branch/Xfmr
+      INTEGER ISUBS, SS(4), IBRCH(4), INODE       ! SS/Node/Branch/Xfmr
 
 
 !---------------------------------------
@@ -1083,16 +1099,16 @@
 ! Increment global storage indices
 
       INODE     = NNODE + 2
-      NNODE     = NNODE + 54
+      NNODE     = NNODE + 41
       NCSCS     = NCSCS + 0
       NCSCR     = NCSCR + 0
 
 ! Initialize Subsystem Mapping
 
       ISUBS = NSUBS + 0
-      NSUBS = NSUBS + 5
+      NSUBS = NSUBS + 4
 
-      DO IT_0 = 1,5
+      DO IT_0 = 1,4
          SS(IT_0) = SUBS(ISUBS + IT_0)
       END DO
 
@@ -1109,9 +1125,6 @@
 
       IBRCH(4)     = NBRCH(SS(4))
       NBRCH(SS(4)) = NBRCH(SS(4)) + 18
-
-      IBRCH(5)     = NBRCH(SS(5))
-      NBRCH(SS(5)) = NBRCH(SS(5)) + 2
 !---------------------------------------
 ! Electrical Node Lookup
 !---------------------------------------
@@ -1132,6 +1145,11 @@
       IVD1_1 = NRTCF
       NRTCF  = NRTCF + 5
       IF (ABS(1.0) .GT. 1.0E-20) THEN
+        RTCF(IVD1_1) = 1.0/ABS(1.0)
+      ELSE
+        RTCF(IVD1_1) = 1.0
+      ENDIF
+      IF (ABS(1.0) .GT. 1.0E-20) THEN
         RTCF(IVD1_1+1) = 1.0/ABS(1.0)
       ELSE
         RTCF(IVD1_1+1) = 1.0
@@ -1141,6 +1159,12 @@
 ! 100:[multimeter] Multimeter 
       IVD1_1 = NRTCF
       NRTCF  = NRTCF + 5
+      IF (ABS(1.0) .GT. 1.0E-20) THEN
+        RTCF(IVD1_1) = 1.0/ABS(1.0)
+      ELSE
+        RTCF(IVD1_1) = 1.0
+      ENDIF
+      RTCF(IVD1_1+2) = 0.02
 
 ! 160:[datamerge] Merges data signals into an array 
 
@@ -1161,11 +1185,17 @@
 ! 250:[consti] Integer Constant 
       type3 = 0
 
-! 350:[pgb] Output Channel 'Itest'
+! 320:[pgb] Output Channel 'Pin'
 
-! 380:[pgb] Output Channel 'I2'
+! 350:[pgb] Output Channel 'Pout'
 
-! 390:[pgb] Output Channel 'I1'
+! 360:[pgb] Output Channel 'Qin'
+
+! 370:[pgb] Output Channel 'Qout'
+
+! 400:[pgb] Output Channel 'I2'
+
+! 410:[pgb] Output Channel 'I1'
 
       RETURN
       END

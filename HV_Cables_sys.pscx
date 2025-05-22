@@ -1,7 +1,7 @@
 <project name="HV_Cables_sys" version="4.6.2" schema="" Target="EMTDC">
   <paramlist name="Settings">
     <param name="creator" value="jeewantha,1394742484" />
-    <param name="time_duration" value="0.15" />
+    <param name="time_duration" value="15" />
     <param name="time_step" value="5" />
     <param name="sample_step" value="1000" />
     <param name="chatter_threshold" value=".001" />
@@ -21,7 +21,7 @@
     <param name="Warn" value="0" />
     <param name="Check" value="0" />
     <param name="description" value="" />
-    <param name="revisor" value="刘明炜, 1746777126" />
+    <param name="revisor" value="刘明炜, 1747928023" />
     <param name="labels" value="" />
     <param name="startup_filename" value="D:\liumingwei\Documents\PSCAD\Project_0417\HV_Cables_sys.gf42\HV_Cables_sys.snp" />
   </paramlist>
@@ -1188,7 +1188,7 @@
       </schematic>
       <references />
     </Definition>
-    <Definition classid="RowDefn" name="Cable_1" group="" url="" version="" build="" crc="21974110" instances="1" key="" view="false" date="1746776214" id="2121925011">
+    <Definition classid="RowDefn" name="Cable_1" group="" url="" version="" build="" crc="21974110" instances="1" key="" view="false" date="1747927594" id="2121925011">
       <paramlist name="">
         <param name="Description" value="" />
         <param name="type" value="Cable" />
@@ -1434,7 +1434,7 @@
       </schematic>
       <references />
     </Definition>
-    <Definition classid="StationDefn" name="Station" group="" url="" version="" build="" crc="57668916" instances="1" key="" view="false" id="1196646334" date="1746776162">
+    <Definition classid="StationDefn" name="Station" group="" url="" version="" build="" crc="57668916" instances="1" key="" view="false" id="1196646334" date="1747927588">
       <paramlist name="">
         <param name="Description" value="" />
       </paramlist>
@@ -1459,7 +1459,7 @@
         </Wire>
       </schematic>
     </Definition>
-    <Definition classid="UserCmpDefn" name="Main" group="" url="" version="" build="" crc="7536263" instances="1" key="" view="false" date="1746776524" id="411448843">
+    <Definition classid="UserCmpDefn" name="Main" group="" url="" version="" build="" crc="11950690" instances="1" key="" view="false" date="1747927866" id="411448843">
       <paramlist name="">
         <param name="Description" value="" />
       </paramlist>
@@ -1731,8 +1731,8 @@ Shaeth is connected to the ground via 1 mohm resister. Alternatively sheath can 
           <paramlist link="-1" name="" crc="83966017">
             <param name="MeasI" value="1" />
             <param name="MeasV" value="1" />
-            <param name="MeasP" value="0" />
-            <param name="MeasQ" value="0" />
+            <param name="MeasP" value="1" />
+            <param name="MeasQ" value="1" />
             <param name="RMS" value="1" />
             <param name="MeasPh" value="0" />
             <param name="S" value="1.0 [MVA]" />
@@ -1742,8 +1742,8 @@ Shaeth is connected to the ground via 1 mohm resister. Alternatively sheath can 
             <param name="Dis" value="0" />
             <param name="CurI" value="US" />
             <param name="VolI" value="IS" />
-            <param name="P" value="" />
-            <param name="Q" value="" />
+            <param name="P" value="Pin" />
+            <param name="Q" value="Qin" />
             <param name="Vrms" value="US_rms" />
             <param name="Ph" value="" />
             <param name="hide1" value="0" />
@@ -1766,8 +1766,8 @@ Shaeth is connected to the ground via 1 mohm resister. Alternatively sheath can 
           <paramlist link="-1" name="" crc="83966017">
             <param name="MeasI" value="1" />
             <param name="MeasV" value="1" />
-            <param name="MeasP" value="0" />
-            <param name="MeasQ" value="0" />
+            <param name="MeasP" value="1" />
+            <param name="MeasQ" value="1" />
             <param name="RMS" value="0" />
             <param name="MeasPh" value="0" />
             <param name="S" value="1.0 [MVA]" />
@@ -1777,8 +1777,8 @@ Shaeth is connected to the ground via 1 mohm resister. Alternatively sheath can 
             <param name="Dis" value="0" />
             <param name="CurI" value="UL" />
             <param name="VolI" value="IL" />
-            <param name="P" value="" />
-            <param name="Q" value="" />
+            <param name="P" value="Pout" />
+            <param name="Q" value="Qout" />
             <param name="Vrms" value="" />
             <param name="Ph" value="" />
             <param name="hide1" value="0" />
@@ -2246,7 +2246,7 @@ Shaeth is connected to the ground via 1 mohm resister. Alternatively sheath can 
           <vertex x="0" y="0" />
           <vertex x="36" y="0" />
         </Wire>
-        <User classid="UserCmp" name="master:pgb" id="1395211711" x="576" y="738" w="38" h="38" z="360" orient="0" defn="master:pgb" link="-1" q="4">
+        <User classid="UserCmp" name="master:pgb" id="1395211711" x="576" y="738" w="38" h="38" z="400" orient="0" defn="master:pgb" link="-1" q="4">
           <paramlist link="-1" name="" crc="25850285">
             <param name="Name" value="I2" />
             <param name="Group" value="" />
@@ -2271,7 +2271,7 @@ Shaeth is connected to the ground via 1 mohm resister. Alternatively sheath can 
             <param name="Name" value="I1" />
           </paramlist>
         </User>
-        <User classid="UserCmp" name="master:pgb" id="224325455" x="576" y="684" w="38" h="38" z="370" orient="0" defn="master:pgb" link="-1" q="4">
+        <User classid="UserCmp" name="master:pgb" id="224325455" x="576" y="684" w="38" h="38" z="410" orient="0" defn="master:pgb" link="-1" q="4">
           <paramlist link="-1" name="" crc="25850285">
             <param name="Name" value="I1" />
             <param name="Group" value="" />
@@ -2839,7 +2839,7 @@ Shaeth is connected to the ground via 1 mohm resister. Alternatively sheath can 
             <param name="C1" value="" />
           </paramlist>
         </User>
-        <User classid="UserCmp" defn="master:varrlc" id="793648942" x="1170" y="522" w="50" h="40" z="440" orient="1" link="-1" q="4">
+        <User classid="UserCmp" defn="master:varrlc" id="793648942" x="1170" y="522" w="50" h="40" z="480" orient="1" link="-1" q="4">
           <paramlist link="-1" name="" crc="76661056">
             <param name="RLC" value="0" />
             <param name="R" value="Rg" />
@@ -2850,7 +2850,7 @@ Shaeth is connected to the ground via 1 mohm resister. Alternatively sheath can 
             <param name="I" value="" />
           </paramlist>
         </User>
-        <User classid="UserCmp" defn="master:varrlc" id="1726616115" x="1188" y="522" w="50" h="40" z="430" orient="1" link="-1" q="4">
+        <User classid="UserCmp" defn="master:varrlc" id="1726616115" x="1188" y="540" w="50" h="40" z="470" orient="1" link="-1" q="4">
           <paramlist link="-1" name="" crc="76661056">
             <param name="RLC" value="0" />
             <param name="R" value="Rg" />
@@ -2861,7 +2861,7 @@ Shaeth is connected to the ground via 1 mohm resister. Alternatively sheath can 
             <param name="I" value="" />
           </paramlist>
         </User>
-        <User classid="UserCmp" defn="master:varrlc" id="1224452759" x="1206" y="522" w="50" h="40" z="420" orient="1" link="-1" q="4">
+        <User classid="UserCmp" defn="master:varrlc" id="1224452759" x="1206" y="522" w="50" h="40" z="460" orient="1" link="-1" q="4">
           <paramlist link="-1" name="" crc="76661056">
             <param name="RLC" value="0" />
             <param name="R" value="Rg" />
@@ -2872,7 +2872,7 @@ Shaeth is connected to the ground via 1 mohm resister. Alternatively sheath can 
             <param name="I" value="" />
           </paramlist>
         </User>
-        <User classid="UserCmp" defn="master:varrlc" id="1641379058" x="738" y="522" w="50" h="40" z="460" orient="1" link="-1" q="4">
+        <User classid="UserCmp" defn="master:varrlc" id="1641379058" x="738" y="522" w="50" h="40" z="500" orient="1" link="-1" q="4">
           <paramlist link="-1" name="" crc="76661056">
             <param name="RLC" value="0" />
             <param name="R" value="Rg" />
@@ -2883,7 +2883,7 @@ Shaeth is connected to the ground via 1 mohm resister. Alternatively sheath can 
             <param name="I" value="" />
           </paramlist>
         </User>
-        <User classid="UserCmp" defn="master:varrlc" id="1210427712" x="720" y="522" w="50" h="40" z="470" orient="1" link="-1" q="4">
+        <User classid="UserCmp" defn="master:varrlc" id="1210427712" x="720" y="522" w="50" h="40" z="510" orient="1" link="-1" q="4">
           <paramlist link="-1" name="" crc="76661056">
             <param name="RLC" value="0" />
             <param name="R" value="Rg" />
@@ -2894,7 +2894,7 @@ Shaeth is connected to the ground via 1 mohm resister. Alternatively sheath can 
             <param name="I" value="" />
           </paramlist>
         </User>
-        <User classid="UserCmp" defn="master:varrlc" id="772817955" x="702" y="522" w="50" h="40" z="480" orient="1" link="-1" q="4">
+        <User classid="UserCmp" defn="master:varrlc" id="772817955" x="702" y="522" w="50" h="40" z="520" orient="1" link="-1" q="4">
           <paramlist link="-1" name="" crc="76661056">
             <param name="RLC" value="0" />
             <param name="R" value="Rg" />
@@ -2905,7 +2905,7 @@ Shaeth is connected to the ground via 1 mohm resister. Alternatively sheath can 
             <param name="I" value="" />
           </paramlist>
         </User>
-        <User classid="UserCmp" name="" id="1658766998" x="1818" y="450" w="31" h="73" z="450" orient="4" link="-1" defn="master:tpflt" layer="" q="4">
+        <User classid="UserCmp" name="" id="1658766998" x="1818" y="450" w="31" h="73" z="490" orient="4" link="-1" defn="master:tpflt" layer="" q="4">
           <paramlist link="-1" name="" crc="91443900">
             <param name="Ctype" value="1" />
             <param name="OpCur" value="0" />
@@ -2924,7 +2924,7 @@ Shaeth is connected to the ground via 1 mohm resister. Alternatively sheath can 
             <param name="AG1" value="0" />
           </paramlist>
         </User>
-        <User classid="UserCmp" name="" id="104198285" x="1692" y="486" w="76" h="56" z="410" orient="4" link="-1" defn="master:tfaultn" layer="" q="4">
+        <User classid="UserCmp" name="" id="104198285" x="1692" y="486" w="76" h="56" z="450" orient="4" link="-1" defn="master:tfaultn" layer="" q="4">
           <paramlist link="-1" name="" crc="34289498">
             <param name="TF" value="fault_time" />
             <param name="DF" value="11111" />
@@ -2973,7 +2973,7 @@ Shaeth is connected to the ground via 1 mohm resister. Alternatively sheath can 
         <User classid="UserCmp" name="master:ground" id="1646121891" x="1530" y="522" w="22" h="28" z="0" orient="1" defn="master:ground" link="-1" q="4">
           <paramlist link="-1" name="" crc="28206164" />
         </User>
-        <User classid="UserCmp" name="" id="525947723" x="198" y="342" w="76" h="38" z="500" orient="4" link="-1" defn="master:breaker3" layer="" q="4">
+        <User classid="UserCmp" name="" id="525947723" x="198" y="342" w="76" h="38" z="540" orient="4" link="-1" defn="master:breaker3" layer="" q="4">
           <paramlist link="-1" name="" crc="112439510">
             <param name="Ctrl" value="0" />
             <param name="OPCUR" value="0" />
@@ -3023,7 +3023,7 @@ Shaeth is connected to the ground via 1 mohm resister. Alternatively sheath can 
             <param name="Name" value="BRK" />
           </paramlist>
         </User>
-        <User classid="UserCmp" name="" id="2070493614" x="180" y="432" w="76" h="56" z="490" orient="4" link="-1" defn="master:tbreakn" layer="" q="4">
+        <User classid="UserCmp" name="" id="2070493614" x="180" y="432" w="76" h="56" z="530" orient="4" link="-1" defn="master:tbreakn" layer="" q="4">
           <paramlist link="-1" name="" crc="27973537">
             <param name="NUMS" value="1" />
             <param name="INIT" value="0" />
@@ -3049,7 +3049,7 @@ Shaeth is connected to the ground via 1 mohm resister. Alternatively sheath can 
           <vertex x="0" y="18" />
           <vertex x="162" y="18" />
         </Wire>
-        <User classid="UserCmp" name="" id="2012777363" x="1566" y="954" w="76" h="60" z="330" orient="0" link="-1" defn="master:sumjct" layer="" q="4">
+        <User classid="UserCmp" name="" id="2012777363" x="1566" y="954" w="76" h="60" z="340" orient="0" link="-1" defn="master:sumjct" layer="" q="4">
           <paramlist link="-1" name="" crc="6678153">
             <param name="DPath" value="1" />
             <param name="A" value="0" />
@@ -3113,7 +3113,7 @@ Shaeth is connected to the ground via 1 mohm resister. Alternatively sheath can 
           <vertex x="0" y="0" />
           <vertex x="18" y="0" />
         </Wire>
-        <User classid="UserCmp" name="master:pgb" id="1698922523" x="1998" y="720" w="26" h="38" z="350" orient="1" defn="master:pgb" link="-1" layer="" q="4">
+        <User classid="UserCmp" name="master:pgb" id="1698922523" x="1998" y="720" w="26" h="38" z="390" orient="1" defn="master:pgb" link="-1" layer="" q="4">
           <paramlist link="-1" name="" crc="25850285">
             <param name="Name" value="Resistance" />
             <param name="Group" value="" />
@@ -3201,7 +3201,7 @@ Shaeth is connected to the ground via 1 mohm resister. Alternatively sheath can 
           <vertex x="0" y="0" />
           <vertex x="36" y="0" />
         </Wire>
-        <User classid="UserCmp" name="master:pgb" id="1373128288" x="1998" y="900" w="26" h="38" z="320" orient="1" defn="master:pgb" link="-1" layer="" q="4">
+        <User classid="UserCmp" name="master:pgb" id="1373128288" x="1998" y="900" w="26" h="38" z="330" orient="1" defn="master:pgb" link="-1" layer="" q="4">
           <paramlist link="-1" name="" crc="25850285">
             <param name="Name" value="fault_res" />
             <param name="Group" value="" />
@@ -3304,7 +3304,7 @@ Shaeth is connected to the ground via 1 mohm resister. Alternatively sheath can 
             <param name="Name" value="type3" />
           </paramlist>
         </User>
-        <User classid="UserCmp" name="" id="1639476642" x="1620" y="828" w="25" h="22" z="340" orient="0" link="-1" defn="master:datatap" layer="" q="4">
+        <User classid="UserCmp" name="" id="1639476642" x="1620" y="828" w="25" h="22" z="380" orient="0" link="-1" defn="master:datatap" layer="" q="4">
           <paramlist link="-1" name="" crc="9058255">
             <param name="Index" value="1" />
             <param name="Dim" value="1" />
@@ -3389,7 +3389,7 @@ Shaeth is connected to the ground via 1 mohm resister. Alternatively sheath can 
             <param name="DF" value="11111" />
           </paramlist>
         </User>
-        <User classid="UserCmp" name="" id="436739354" x="990" y="558" w="31" h="73" z="400" orient="4" link="-1" defn="master:tpflt" layer="" q="4">
+        <User classid="UserCmp" name="" id="436739354" x="990" y="558" w="31" h="73" z="440" orient="4" link="-1" defn="master:tpflt" layer="" q="4">
           <paramlist link="-1" name="" crc="91443900">
             <param name="Ctype" value="1" />
             <param name="OpCur" value="0" />
@@ -3422,13 +3422,13 @@ Shaeth is connected to the ground via 1 mohm resister. Alternatively sheath can 
           <vertex x="0" y="0" />
           <vertex x="54" y="0" />
         </Wire>
-        <User classid="UserCmp" name="" id="54628725" x="1260" y="594" w="76" h="56" z="380" orient="4" link="-1" defn="master:tfaultn" layer="" q="4">
+        <User classid="UserCmp" name="" id="54628725" x="1260" y="594" w="76" h="56" z="420" orient="4" link="-1" defn="master:tfaultn" layer="" q="4">
           <paramlist link="-1" name="" crc="34289498">
             <param name="TF" value="fault_time" />
             <param name="DF" value="11111" />
           </paramlist>
         </User>
-        <User classid="UserCmp" name="" id="1019763324" x="1386" y="558" w="31" h="73" z="390" orient="4" link="-1" defn="master:tpflt" layer="" q="4">
+        <User classid="UserCmp" name="" id="1019763324" x="1386" y="558" w="31" h="73" z="430" orient="4" link="-1" defn="master:tpflt" layer="" q="4">
           <paramlist link="-1" name="" crc="91443900">
             <param name="Ctype" value="1" />
             <param name="OpCur" value="0" />
@@ -3637,6 +3637,302 @@ Shaeth is connected to the ground via 1 mohm resister. Alternatively sheath can 
           <vertex x="54" y="54" />
           <vertex x="54" y="72" />
         </Wire>
+        <User classid="UserCmp" name="master:datalabel" id="442249217" x="2430" y="828" w="24" h="21" z="1" orient="0" defn="master:datalabel" link="-1" q="4">
+          <paramlist link="-1" name="" crc="98359112">
+            <param name="Name" value="Pin" />
+          </paramlist>
+        </User>
+        <Wire classid="WireOrthogonal" id="616069566" name="" x="2430" y="828" w="46" h="10" orient="0">
+          <vertex x="0" y="0" />
+          <vertex x="36" y="0" />
+        </Wire>
+        <User classid="UserCmp" name="master:pgb" id="1282198945" x="2466" y="828" w="38" h="38" z="320" orient="0" defn="master:pgb" link="-1" q="4">
+          <paramlist link="-1" name="" crc="25850285">
+            <param name="Name" value="Pin" />
+            <param name="Group" value="" />
+            <param name="UseSignalName" value="0" />
+            <param name="enab" value="1" />
+            <param name="Display" value="1" />
+            <param name="Scale" value="1.0" />
+            <param name="Units" value="" />
+            <param name="mrun" value="1" />
+            <param name="Pol" value="0" />
+            <param name="Max" value="2.0" />
+            <param name="Min" value="-2.0" />
+          </paramlist>
+        </User>
+        <User classid="UserCmp" name="master:pgb" id="296774946" x="2466" y="864" w="42" h="38" z="350" orient="0" defn="master:pgb" link="-1" q="4">
+          <paramlist link="-1" name="" crc="25850285">
+            <param name="Name" value="Pout" />
+            <param name="Group" value="" />
+            <param name="UseSignalName" value="0" />
+            <param name="enab" value="1" />
+            <param name="Display" value="1" />
+            <param name="Scale" value="1.0" />
+            <param name="Units" value="" />
+            <param name="mrun" value="1" />
+            <param name="Pol" value="0" />
+            <param name="Max" value="2.0" />
+            <param name="Min" value="-2.0" />
+          </paramlist>
+        </User>
+        <Wire classid="WireOrthogonal" id="1807001784" name="" x="2430" y="864" w="46" h="10" orient="0">
+          <vertex x="0" y="0" />
+          <vertex x="36" y="0" />
+        </Wire>
+        <User classid="UserCmp" name="master:datalabel" id="1707969914" x="2430" y="864" w="32" h="21" z="1" orient="0" defn="master:datalabel" link="-1" q="4">
+          <paramlist link="-1" name="" crc="98359112">
+            <param name="Name" value="Pout" />
+          </paramlist>
+        </User>
+        <User classid="UserCmp" name="master:pgb" id="918919079" x="2430" y="918" w="38" h="38" z="360" orient="0" defn="master:pgb" link="-1" q="4">
+          <paramlist link="-1" name="" crc="25850285">
+            <param name="Name" value="Qin" />
+            <param name="Group" value="" />
+            <param name="UseSignalName" value="0" />
+            <param name="enab" value="1" />
+            <param name="Display" value="1" />
+            <param name="Scale" value="1.0" />
+            <param name="Units" value="" />
+            <param name="mrun" value="1" />
+            <param name="Pol" value="0" />
+            <param name="Max" value="2.0" />
+            <param name="Min" value="-2.0" />
+          </paramlist>
+        </User>
+        <Wire classid="WireOrthogonal" id="1296478272" name="" x="2394" y="918" w="46" h="10" orient="0">
+          <vertex x="0" y="0" />
+          <vertex x="36" y="0" />
+        </Wire>
+        <User classid="UserCmp" name="master:datalabel" id="979875850" x="2394" y="918" w="24" h="21" z="1" orient="0" defn="master:datalabel" link="-1" q="4">
+          <paramlist link="-1" name="" crc="98359112">
+            <param name="Name" value="Qin" />
+          </paramlist>
+        </User>
+        <User classid="UserCmp" name="master:pgb" id="151456015" x="2466" y="936" w="42" h="38" z="370" orient="0" defn="master:pgb" link="-1" q="4">
+          <paramlist link="-1" name="" crc="25850285">
+            <param name="Name" value="Qout" />
+            <param name="Group" value="" />
+            <param name="UseSignalName" value="0" />
+            <param name="enab" value="1" />
+            <param name="Display" value="1" />
+            <param name="Scale" value="1.0" />
+            <param name="Units" value="" />
+            <param name="mrun" value="1" />
+            <param name="Pol" value="0" />
+            <param name="Max" value="2.0" />
+            <param name="Min" value="-2.0" />
+          </paramlist>
+        </User>
+        <Wire classid="WireOrthogonal" id="925361388" name="" x="2430" y="936" w="46" h="10" orient="0">
+          <vertex x="0" y="0" />
+          <vertex x="36" y="0" />
+        </Wire>
+        <User classid="UserCmp" name="master:datalabel" id="366755104" x="2430" y="936" w="32" h="21" z="1" orient="0" defn="master:datalabel" link="-1" q="4">
+          <paramlist link="-1" name="" crc="98359112">
+            <param name="Name" value="Qout" />
+          </paramlist>
+        </User>
+        <Frame classid="GraphFrame" id="1885656062" name="frame" x="2592" y="738" w="576" h="288" link="-1">
+          <paramlist link="-1" name="">
+            <param name="Icon" value="-1,0" />
+            <param name="state" value="1" />
+            <param name="title" value="$(GROUP) : Graphs" />
+            <param name="XLabel" value="sec" />
+            <param name="Pan" value="false,75" />
+            <param name="markers" value="false" />
+            <param name="glyphs" value="false" />
+            <param name="ticks" value="false" />
+            <param name="grid" value="false" />
+            <param name="yinter" value="false" />
+            <param name="xinter" value="false" />
+            <param name="snapaperture" value="false" />
+            <param name="dynaperture" value="true" />
+            <param name="minorgrids" value="false" />
+            <param name="lockmarkers" value="false" />
+            <param name="deltareadout" value="false" />
+            <param name="xmarker" value="0" />
+            <param name="omarker" value="0" />
+          </paramlist>
+          <paramlist link="1885656062" name="">
+            <param name="xmin" value="0.0" />
+            <param name="xmax" value="1.0" />
+          </paramlist>
+          <Graph classid="OverlayGraph" id="146292940" link="-1">
+            <paramlist link="-1" name="">
+              <param name="title" value="" />
+              <param name="units" value="" />
+              <param name="gridvalue" value="50.000000" />
+              <param name="yintervalue" value="0.000000" />
+              <param name="grid" value="true" />
+              <param name="ticks" value="false" />
+              <param name="glyphs" value="false" />
+              <param name="yinter" value="true" />
+              <param name="xinter" value="true" />
+              <param name="marker" value="false" />
+              <param name="trigger" value="false" />
+              <param name="autocolor" value="false" />
+              <param name="invertcolor" value="false" />
+              <param name="crosshair" value="false" />
+              <param name="manualscale" value="false" />
+            </paramlist>
+            <paramlist link="146292940" name="">
+              <param name="ymin" value="-1" />
+              <param name="ymax" value="1" />
+            </paramlist>
+            <Curve classid="Curve" id="690622916" name="Pin" link="1282198945" color="0" bold="0" show="-1" mode="0" />
+          </Graph>
+        </Frame>
+        <Frame classid="GraphFrame" id="1120625129" name="frame" x="2574" y="1026" w="576" h="288" link="-1">
+          <paramlist link="-1" name="">
+            <param name="Icon" value="-1,0" />
+            <param name="state" value="1" />
+            <param name="title" value="$(GROUP) : Graphs" />
+            <param name="XLabel" value="sec" />
+            <param name="Pan" value="false,75" />
+            <param name="markers" value="false" />
+            <param name="glyphs" value="false" />
+            <param name="ticks" value="false" />
+            <param name="grid" value="false" />
+            <param name="yinter" value="false" />
+            <param name="xinter" value="false" />
+            <param name="snapaperture" value="false" />
+            <param name="dynaperture" value="true" />
+            <param name="minorgrids" value="false" />
+            <param name="lockmarkers" value="false" />
+            <param name="deltareadout" value="false" />
+            <param name="xmarker" value="0" />
+            <param name="omarker" value="0" />
+          </paramlist>
+          <paramlist link="1120625129" name="">
+            <param name="xmin" value="0.0" />
+            <param name="xmax" value="1.0" />
+          </paramlist>
+          <Graph classid="OverlayGraph" id="1728401345" link="-1">
+            <paramlist link="-1" name="">
+              <param name="title" value="" />
+              <param name="units" value="" />
+              <param name="gridvalue" value="50.000000" />
+              <param name="yintervalue" value="0.000000" />
+              <param name="grid" value="true" />
+              <param name="ticks" value="false" />
+              <param name="glyphs" value="false" />
+              <param name="yinter" value="true" />
+              <param name="xinter" value="true" />
+              <param name="marker" value="false" />
+              <param name="trigger" value="false" />
+              <param name="autocolor" value="false" />
+              <param name="invertcolor" value="false" />
+              <param name="crosshair" value="false" />
+              <param name="manualscale" value="false" />
+            </paramlist>
+            <paramlist link="1728401345" name="">
+              <param name="ymin" value="-1" />
+              <param name="ymax" value="1" />
+            </paramlist>
+            <Curve classid="Curve" id="521454208" name="Pout" link="296774946" color="0" bold="0" show="-1" mode="0" />
+          </Graph>
+        </Frame>
+        <Frame classid="GraphFrame" id="197698361" name="frame" x="2322" y="1620" w="576" h="288" link="-1">
+          <paramlist link="-1" name="">
+            <param name="Icon" value="-1,0" />
+            <param name="state" value="1" />
+            <param name="title" value="$(GROUP) : Graphs" />
+            <param name="XLabel" value="sec" />
+            <param name="Pan" value="false,75" />
+            <param name="markers" value="false" />
+            <param name="glyphs" value="false" />
+            <param name="ticks" value="false" />
+            <param name="grid" value="false" />
+            <param name="yinter" value="false" />
+            <param name="xinter" value="false" />
+            <param name="snapaperture" value="false" />
+            <param name="dynaperture" value="true" />
+            <param name="minorgrids" value="false" />
+            <param name="lockmarkers" value="false" />
+            <param name="deltareadout" value="false" />
+            <param name="xmarker" value="0" />
+            <param name="omarker" value="0" />
+          </paramlist>
+          <paramlist link="197698361" name="">
+            <param name="xmin" value="0.0" />
+            <param name="xmax" value="1.0" />
+          </paramlist>
+          <Graph classid="OverlayGraph" id="1592444409" link="-1">
+            <paramlist link="-1" name="">
+              <param name="title" value="" />
+              <param name="units" value="" />
+              <param name="gridvalue" value="20.000000" />
+              <param name="yintervalue" value="0.000000" />
+              <param name="grid" value="true" />
+              <param name="ticks" value="false" />
+              <param name="glyphs" value="false" />
+              <param name="yinter" value="true" />
+              <param name="xinter" value="true" />
+              <param name="marker" value="false" />
+              <param name="trigger" value="false" />
+              <param name="autocolor" value="false" />
+              <param name="invertcolor" value="false" />
+              <param name="crosshair" value="false" />
+              <param name="manualscale" value="false" />
+            </paramlist>
+            <paramlist link="1592444409" name="">
+              <param name="ymin" value="-1" />
+              <param name="ymax" value="1" />
+            </paramlist>
+            <Curve classid="Curve" id="1229961188" name="Qout" link="151456015" color="0" bold="0" show="-1" mode="0" />
+          </Graph>
+        </Frame>
+        <Frame classid="GraphFrame" id="1440424686" name="frame" x="2340" y="1332" w="576" h="288" link="-1">
+          <paramlist link="-1" name="">
+            <param name="Icon" value="-1,0" />
+            <param name="state" value="1" />
+            <param name="title" value="$(GROUP) : Graphs" />
+            <param name="XLabel" value="sec" />
+            <param name="Pan" value="false,75" />
+            <param name="markers" value="false" />
+            <param name="glyphs" value="false" />
+            <param name="ticks" value="false" />
+            <param name="grid" value="false" />
+            <param name="yinter" value="false" />
+            <param name="xinter" value="false" />
+            <param name="snapaperture" value="false" />
+            <param name="dynaperture" value="true" />
+            <param name="minorgrids" value="false" />
+            <param name="lockmarkers" value="false" />
+            <param name="deltareadout" value="false" />
+            <param name="xmarker" value="0" />
+            <param name="omarker" value="0" />
+          </paramlist>
+          <paramlist link="1440424686" name="">
+            <param name="xmin" value="0.0" />
+            <param name="xmax" value="1.0" />
+          </paramlist>
+          <Graph classid="OverlayGraph" id="1215817379" link="-1">
+            <paramlist link="-1" name="">
+              <param name="title" value="" />
+              <param name="units" value="" />
+              <param name="gridvalue" value="20.000000" />
+              <param name="yintervalue" value="0.000000" />
+              <param name="grid" value="true" />
+              <param name="ticks" value="false" />
+              <param name="glyphs" value="false" />
+              <param name="yinter" value="true" />
+              <param name="xinter" value="true" />
+              <param name="marker" value="false" />
+              <param name="trigger" value="false" />
+              <param name="autocolor" value="false" />
+              <param name="invertcolor" value="false" />
+              <param name="crosshair" value="false" />
+              <param name="manualscale" value="false" />
+            </paramlist>
+            <paramlist link="1215817379" name="">
+              <param name="ymin" value="-1" />
+              <param name="ymax" value="1" />
+            </paramlist>
+            <Curve classid="Curve" id="1226840983" name="Qin" link="918919079" color="0" bold="0" show="-1" mode="0" />
+          </Graph>
+        </Frame>
       </schematic>
       <references>
         <using namespace="master" />
@@ -3710,11 +4006,11 @@ Shaeth is connected to the ground via 1 mohm resister. Alternatively sheath can 
   </List>
   <paramlist name="Libs" />
   <hierarchy>
-    <call link="1089612578" name="HV_Cables_sys:Station" z="-1" view="false" instance="0">
+    <call link="1249407852" name="HV_Cables_sys:Station" z="-1" view="false" instance="0">
       <call link="1353776320" name="HV_Cables_sys:Main" z="-1" view="true" instance="0">
         <call link="1168099875" name="HV_Cables_sys:Cable_1" z="-1" view="false" instance="1" />
-        <call link="1346333537" name="HV_Cables_sys:Cable_1" z="-1" view="false" instance="2" />
-        <call link="1172052633" name="HV_Cables_sys:Cable_1" z="-1" view="false" instance="0" />
+        <call link="1172052633" name="HV_Cables_sys:Cable_1" z="-1" view="false" instance="2" />
+        <call link="1346333537" name="HV_Cables_sys:Cable_1" z="-1" view="false" instance="0" />
       </call>
     </call>
   </hierarchy>
