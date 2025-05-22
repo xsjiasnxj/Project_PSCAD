@@ -38,7 +38,7 @@ Frequency Dep. (Phase) Model Options:
    Sheath Outer Radius = 0.0447
    Sheath Resistivity = 2.73e-08
    Sheath Permeability = 1.0
-   Insulator 2 Outer Radius = 0.0498
+   Insulator 2 Outer Radius = 0.0607
    Insulator 2 Relative Permittivity = 2.3
    Insulator 2 Relative Permeability = 1.0
    }
@@ -68,7 +68,7 @@ Line Constants Ground Data:
    Sheath Outer Radius = 0.0447
    Sheath Resistivity = 2.73e-08
    Sheath Permeability = 1.0
-   Insulator 2 Outer Radius = 0.0498
+   Insulator 2 Outer Radius = 0.0607
    Insulator 2 Relative Permittivity = 2.3
    Insulator 2 Relative Permeability = 1.0
    }
@@ -88,7 +88,7 @@ Line Constants Ground Data:
    Sheath Outer Radius = 0.0447
    Sheath Resistivity = 2.73e-08
    Sheath Permeability = 1.0
-   Insulator 2 Outer Radius = 0.0498
+   Insulator 2 Outer Radius = 0.0607
    Insulator 2 Relative Permittivity = 2.3
    Insulator 2 Relative Permeability = 1.0
    }

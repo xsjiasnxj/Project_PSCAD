@@ -55,7 +55,7 @@
       REAL     I14, I21, I22, I23, I24, I31, I32
       REAL     I33, I34, Rg, fault_time
       REAL     brk_delay, fault_res, brk_time
-      REAL     US(3), IS(3), US_rms, UL(3), IL(3)
+      REAL     IL(3), US(3), IS(3), US_rms, UL(3)
 
 ! Internal Variables
       LOGICAL  LVD1_1
@@ -94,7 +94,7 @@
       ISTOF     = NSTOF
       NSTOF     = NSTOF + 42
       IPGB      = NPGB
-      NPGB      = NPGB + 18
+      NPGB      = NPGB + 21
       INODE     = NNODE + 2
       NNODE     = NNODE + 41
       NCSCS     = NCSCS + 0
@@ -155,17 +155,17 @@
       IT_5     = STOI(ISTOI + 22)
       IT_6     = STOI(ISTOI + 23)
       IT_7     = STOI(ISTOI + 24)
-      US_rms   = STOF(ISTOF + 36)
+      US_rms   = STOF(ISTOF + 39)
       BST_A    = STOI(ISTOI + 25)
       BST_B    = STOI(ISTOI + 26)
       BST_C    = STOI(ISTOI + 27)
 
 ! Array (1:3) quantities...
       DO IT_0 = 1,3
-         US(IT_0) = STOF(ISTOF + 29 + IT_0)
-         IS(IT_0) = STOF(ISTOF + 32 + IT_0)
-         UL(IT_0) = STOF(ISTOF + 36 + IT_0)
-         IL(IT_0) = STOF(ISTOF + 39 + IT_0)
+         IL(IT_0) = STOF(ISTOF + 29 + IT_0)
+         US(IT_0) = STOF(ISTOF + 32 + IT_0)
+         IS(IT_0) = STOF(ISTOF + 35 + IT_0)
+         UL(IT_0) = STOF(ISTOF + 39 + IT_0)
       END DO
 
 ! Array (1:4) quantities...
@@ -201,15 +201,21 @@
 !---------------------------------------
 
 
-! 190:[consti] Integer Constant 
+! 150:[tfaultn] Timed Fault Logic 
+! Timed fault logic
+      IT_3 = 0
+      IF ( TIME .GE. 0.05 ) IT_3 = 1
+      IF ( TIME .GE. (0.05+11111.0) ) IT_3 = 0
+
+! 210:[consti] Integer Constant 
 
       type1 = 0
 
-! 200:[consti] Integer Constant 
+! 220:[consti] Integer Constant 
 
-      type2 = 9
+      type2 = 0
 
-! 210:[mrun] Multiple Run Component 
+! 230:[mrun] Multiple Run Component 
 
 ! Multiple Run Variables Disabled:
       Rg = 0.2
@@ -220,60 +226,60 @@
       fault_res = 0.2
 ! End of Multiple Run Code
 
-! 220:[pgb] Output Channel 'fault_time'
+! 240:[pgb] Output Channel 'fault_time'
 
-      PGB(IPGB+5) = fault_time
+      PGB(IPGB+8) = fault_time
 
-! 230:[consti] Integer Constant 
+! 250:[consti] Integer Constant 
 
       type3 = 0
 
-! 240:[pgb] Output Channel 'brk_delay'
+! 260:[pgb] Output Channel 'brk_delay'
 
-      PGB(IPGB+6) = brk_delay
+      PGB(IPGB+9) = brk_delay
 
-! 250:[mux_array] N channel multiplexer 
+! 270:[mux_array] N channel multiplexer 
 ! Channel Decoder
       IT_2 = 0
       IF ((fault_loc .LE. 12).AND.(fault_loc .GT. 0)) THEN
         IT_2(fault_loc) = fault_type
       ENDIF
 
-! 260:[datatap] Scalar/Array Tap 
+! 280:[datatap] Scalar/Array Tap 
       IT_6 = IT_2(2)
 
-! 270:[pgb] Output Channel 'fault_type'
+! 290:[pgb] Output Channel 'fault_type'
 
-      PGB(IPGB+7) = REAL(fault_type)
+      PGB(IPGB+10) = REAL(fault_type)
 
-! 280:[datatap] Scalar/Array Tap 
+! 300:[datatap] Scalar/Array Tap 
       IT_7 = IT_2(3)
 
-! 290:[pgb] Output Channel 'Location'
+! 310:[pgb] Output Channel 'Location'
 
-      PGB(IPGB+8) = REAL(fault_loc)
+      PGB(IPGB+11) = REAL(fault_loc)
 
-! 300:[pgb] Output Channel 'fault_res'
+! 320:[pgb] Output Channel 'fault_res'
 
-      PGB(IPGB+9) = fault_res
+      PGB(IPGB+12) = fault_res
 
-! 310:[sumjct] Summing/Differencing Junctions 
+! 330:[sumjct] Summing/Differencing Junctions 
       brk_time = + fault_time + brk_delay
 
-! 320:[datatap] Scalar/Array Tap 
+! 340:[datatap] Scalar/Array Tap 
       IT_5 = IT_2(1)
 
-! 330:[pgb] Output Channel 'Resistance'
+! 350:[pgb] Output Channel 'Resistance'
 
-      PGB(IPGB+10) = Rg
+      PGB(IPGB+13) = Rg
 
-! 360:[tfaultn] Timed Fault Logic 
+! 380:[tfaultn] Timed Fault Logic 
 ! Timed fault logic
       IT_4 = 0
       IF ( TIME .GE. fault_time ) IT_4 = 1
       IF ( TIME .GE. (fault_time+11111.0) ) IT_4 = 0
 
-! 370:[tpflt] Three Phase Fault 
+! 390:[tpflt] Three Phase Fault 
       CALL E3PHFLT1_EXE(SS(3), (IBRCH(3)+7), (IBRCH(3)+8), (IBRCH(3)+9),&
      & (IBRCH(3)+10), (IBRCH(3)+11), (IBRCH(3)+12),0,IT_4,type2,fault_re&
      &s)
@@ -288,13 +294,7 @@
       ENDIF
       NSTORI = NSTORI + 1
 
-! 380:[tfaultn] Timed Fault Logic 
-! Timed fault logic
-      IT_3 = 0
-      IF ( TIME .GE. fault_time ) IT_3 = 1
-      IF ( TIME .GE. (fault_time+11111.0) ) IT_3 = 0
-
-! 390:[tpflt] Three Phase Fault 
+! 400:[tpflt] Three Phase Fault 
       CALL E3PHFLT1_EXE(SS(2), (IBRCH(2)+7), (IBRCH(2)+8), (IBRCH(2)+9),&
      & (IBRCH(2)+10), (IBRCH(2)+11), (IBRCH(2)+12),0,IT_3,type1,fault_re&
      &s)
@@ -309,22 +309,22 @@
       ENDIF
       NSTORI = NSTORI + 1
 
-! 400:[tfaultn] Timed Fault Logic 
+! 410:[tfaultn] Timed Fault Logic 
 ! Timed fault logic
       IT_1 = 0
       IF ( TIME .GE. fault_time ) IT_1 = 1
       IF ( TIME .GE. (fault_time+11111.0) ) IT_1 = 0
 
-! 410:[varrlc] Variable R, L or C  
+! 420:[varrlc] Variable R, L or C  
       CALL E_VARRLC1_EXE(0 ,SS(3) ,  (IBRCH(3)+6), 0, Rg, 0.0)
 
-! 420:[varrlc] Variable R, L or C  
+! 430:[varrlc] Variable R, L or C  
       CALL E_VARRLC1_EXE(0 ,SS(3) ,  (IBRCH(3)+5), 0, Rg, 0.0)
 
-! 430:[varrlc] Variable R, L or C  
+! 440:[varrlc] Variable R, L or C  
       CALL E_VARRLC1_EXE(0 ,SS(3) ,  (IBRCH(3)+4), 0, Rg, 0.0)
 
-! 440:[tpflt] Three Phase Fault 
+! 450:[tpflt] Three Phase Fault 
       CALL E3PHFLT1_EXE(SS(4), (IBRCH(4)+13), (IBRCH(4)+14), (IBRCH(4)+1&
      &5), (IBRCH(4)+16), (IBRCH(4)+17), (IBRCH(4)+18),0,IT_1,type3,fault&
      &_res)
@@ -339,16 +339,16 @@
       ENDIF
       NSTORI = NSTORI + 1
 
-! 450:[varrlc] Variable R, L or C  
+! 460:[varrlc] Variable R, L or C  
       CALL E_VARRLC1_EXE(0 ,SS(2) ,  (IBRCH(2)+4), 0, Rg, 0.0)
 
-! 460:[varrlc] Variable R, L or C  
+! 470:[varrlc] Variable R, L or C  
       CALL E_VARRLC1_EXE(0 ,SS(2) ,  (IBRCH(2)+5), 0, Rg, 0.0)
 
-! 470:[varrlc] Variable R, L or C  
+! 480:[varrlc] Variable R, L or C  
       CALL E_VARRLC1_EXE(0 ,SS(2) ,  (IBRCH(2)+6), 0, Rg, 0.0)
 
-! 480:[tbreakn] Timed Breaker Logic 
+! 490:[tbreakn] Timed Breaker Logic 
 ! Timed breaker logic
       IF ( TIMEZERO ) THEN
          BRK = 0
@@ -357,7 +357,7 @@
          IF ( TIME .GE. brk_time ) BRK = (1-0)
       ENDIF
 
-! 490:[breaker3] 3 Phase Breaker 'BRK'
+! 500:[breaker3] 3 Phase Breaker 'BRK'
       IVD1_4 = NSTORI
       NSTORI = NSTORI + 3
 ! Three Phase Breaker
@@ -437,17 +437,17 @@
       STOI(ISTOI + 22) = IT_5
       STOI(ISTOI + 23) = IT_6
       STOI(ISTOI + 24) = IT_7
-      STOF(ISTOF + 36) = US_rms
+      STOF(ISTOF + 39) = US_rms
       STOI(ISTOI + 25) = BST_A
       STOI(ISTOI + 26) = BST_B
       STOI(ISTOI + 27) = BST_C
 
 ! Array (1:3) quantities...
       DO IT_0 = 1,3
-         STOF(ISTOF + 29 + IT_0) = US(IT_0)
-         STOF(ISTOF + 32 + IT_0) = IS(IT_0)
-         STOF(ISTOF + 36 + IT_0) = UL(IT_0)
-         STOF(ISTOF + 39 + IT_0) = IL(IT_0)
+         STOF(ISTOF + 29 + IT_0) = IL(IT_0)
+         STOF(ISTOF + 32 + IT_0) = US(IT_0)
+         STOF(ISTOF + 35 + IT_0) = IS(IT_0)
+         STOF(ISTOF + 39 + IT_0) = UL(IT_0)
       END DO
 
 ! Array (1:4) quantities...
@@ -517,8 +517,8 @@
       INTEGER  type1, type2, type3
       REAL     I3(4), I2(4), I1(4), I11, I12, I13
       REAL     I14, I21, I22, I23, I24, I31, I32
-      REAL     I33, I34, US(3), IS(3), US_rms
-      REAL     UL(3), IL(3)
+      REAL     I33, I34, IL(3), US(3), IS(3)
+      REAL     US_rms, UL(3)
 
 ! Internal Variables
       INTEGER  IVD1_1
@@ -552,7 +552,7 @@
 ! Increment global storage indices
 
       IPGB      = NPGB
-      NPGB      = NPGB + 18
+      NPGB      = NPGB + 21
       INODE     = NNODE + 2
       NNODE     = NNODE + 41
       NCSCS     = NCSCS + 0
@@ -599,14 +599,14 @@
       type1    = STOI(ISTOI + 18)
       type2    = STOI(ISTOI + 20)
       type3    = STOI(ISTOI + 21)
-      US_rms   = STOF(ISTOF + 36)
+      US_rms   = STOF(ISTOF + 39)
 
 ! Array (1:3) quantities...
       DO IT_0 = 1,3
-         US(IT_0) = STOF(ISTOF + 29 + IT_0)
-         IS(IT_0) = STOF(ISTOF + 32 + IT_0)
-         UL(IT_0) = STOF(ISTOF + 36 + IT_0)
-         IL(IT_0) = STOF(ISTOF + 39 + IT_0)
+         IL(IT_0) = STOF(ISTOF + 29 + IT_0)
+         US(IT_0) = STOF(ISTOF + 32 + IT_0)
+         IS(IT_0) = STOF(ISTOF + 35 + IT_0)
+         UL(IT_0) = STOF(ISTOF + 39 + IT_0)
       END DO
 
 ! Array (1:4) quantities...
@@ -702,59 +702,59 @@
 ! 140:[ammeter] Current Meter 'I14'
       I14 = ( CBR((IBRCH(4)+6), SS(4)))
 
-! 150:[datamerge] Merges data signals into an array 
+! 160:[datamerge] Merges data signals into an array 
       I1(1) = I11
       I1(2) = I12
       I1(3) = I13
       I1(4) = I14
 
-! 160:[datamerge] Merges data signals into an array 
+! 170:[datamerge] Merges data signals into an array 
       I2(1) = I21
       I2(2) = I22
       I2(3) = I23
       I2(4) = I24
 
-! 170:[datamerge] Merges data signals into an array 
+! 180:[datamerge] Merges data signals into an array 
       I3(1) = I31
       I3(2) = I32
       I3(3) = I33
       I3(4) = I34
 
-! 180:[pgb] Output Channel 'I3'
+! 190:[pgb] Output Channel 'I3'
 
       DO IVD1_1 = 1, 4
          PGB(IPGB+1+IVD1_1-1) = I3(IVD1_1)
       ENDDO
 
-! 190:[consti] Integer Constant 
+! 200:[pgb] Output Channel 'IL'
+
+      DO IVD1_1 = 1, 3
+         PGB(IPGB+5+IVD1_1-1) = IL(IVD1_1)
+      ENDDO
+
+! 210:[consti] Integer Constant 
 
       type1 = 0
 
-! 200:[consti] Integer Constant 
+! 220:[consti] Integer Constant 
 
-      type2 = 9
+      type2 = 0
 
-! 230:[consti] Integer Constant 
+! 250:[consti] Integer Constant 
 
       type3 = 0
 
-! 340:[pgb] Output Channel 'I2'
+! 360:[pgb] Output Channel 'I2'
 
       DO IVD1_1 = 1, 4
-         PGB(IPGB+11+IVD1_1-1) = I2(IVD1_1)
+         PGB(IPGB+14+IVD1_1-1) = I2(IVD1_1)
       ENDDO
 
-! 350:[pgb] Output Channel 'I1'
+! 370:[pgb] Output Channel 'I1'
 
       DO IVD1_1 = 1, 4
-         PGB(IPGB+15+IVD1_1-1) = I1(IVD1_1)
+         PGB(IPGB+18+IVD1_1-1) = I1(IVD1_1)
       ENDDO
-
-! 370:[tpflt] Three Phase Fault 
-!
-! Multi-phase Fault Currents
-!
-!
 
 ! 390:[tpflt] Three Phase Fault 
 !
@@ -762,13 +762,19 @@
 !
 !
 
-! 440:[tpflt] Three Phase Fault 
+! 400:[tpflt] Three Phase Fault 
 !
 ! Multi-phase Fault Currents
 !
 !
 
-! 490:[breaker3] 3 Phase Breaker 'BRK'
+! 450:[tpflt] Three Phase Fault 
+!
+! Multi-phase Fault Currents
+!
+!
+
+! 500:[breaker3] 3 Phase Breaker 'BRK'
 ! Three Phase Breaker Currents
       CALL BRK_POWER(SS(1), (IBRCH(1)+10), (IBRCH(1)+11), (IBRCH(1)+12),&
      &0,0,0,IVD1_1,0.02,RVD1_1,RVD1_2)
@@ -792,14 +798,14 @@
       STOI(ISTOI + 18) = type1
       STOI(ISTOI + 20) = type2
       STOI(ISTOI + 21) = type3
-      STOF(ISTOF + 36) = US_rms
+      STOF(ISTOF + 39) = US_rms
 
 ! Array (1:3) quantities...
       DO IT_0 = 1,3
-         STOF(ISTOF + 29 + IT_0) = US(IT_0)
-         STOF(ISTOF + 32 + IT_0) = IS(IT_0)
-         STOF(ISTOF + 36 + IT_0) = UL(IT_0)
-         STOF(ISTOF + 39 + IT_0) = IL(IT_0)
+         STOF(ISTOF + 29 + IT_0) = IL(IT_0)
+         STOF(ISTOF + 32 + IT_0) = US(IT_0)
+         STOF(ISTOF + 35 + IT_0) = IS(IT_0)
+         STOF(ISTOF + 39 + IT_0) = UL(IT_0)
       END DO
 
 ! Array (1:4) quantities...
@@ -910,65 +916,65 @@
 !---------------------------------------
 
 
-! 190:[consti] Integer Constant 
+! 210:[consti] Integer Constant 
       type1 = 0
 
-! 200:[consti] Integer Constant 
-      type2 = 9
+! 220:[consti] Integer Constant 
+      type2 = 0
 
-! 220:[pgb] Output Channel 'fault_time'
+! 240:[pgb] Output Channel 'fault_time'
 
-! 230:[consti] Integer Constant 
+! 250:[consti] Integer Constant 
       type3 = 0
 
-! 240:[pgb] Output Channel 'brk_delay'
+! 260:[pgb] Output Channel 'brk_delay'
 
-! 250:[mux_array] N channel multiplexer 
-
-! 260:[datatap] Scalar/Array Tap 
-
-! 270:[pgb] Output Channel 'fault_type'
+! 270:[mux_array] N channel multiplexer 
 
 ! 280:[datatap] Scalar/Array Tap 
 
-! 290:[pgb] Output Channel 'Location'
+! 290:[pgb] Output Channel 'fault_type'
 
-! 300:[pgb] Output Channel 'fault_res'
+! 300:[datatap] Scalar/Array Tap 
 
-! 310:[sumjct] Summing/Differencing Junctions 
+! 310:[pgb] Output Channel 'Location'
 
-! 320:[datatap] Scalar/Array Tap 
+! 320:[pgb] Output Channel 'fault_res'
 
-! 330:[pgb] Output Channel 'Resistance'
+! 330:[sumjct] Summing/Differencing Junctions 
 
-! 370:[tpflt] Three Phase Fault 
-      CALL E3PHFLT1_CFG(1000000.0,0.0)
+! 340:[datatap] Scalar/Array Tap 
+
+! 350:[pgb] Output Channel 'Resistance'
 
 ! 390:[tpflt] Three Phase Fault 
       CALL E3PHFLT1_CFG(1000000.0,0.0)
 
-! 410:[varrlc] Variable R, L or C  
-      CALL E_VARRLC1_CFG(0 ,SS(3) ,  (IBRCH(3)+6), 0)
-
-! 420:[varrlc] Variable R, L or C  
-      CALL E_VARRLC1_CFG(0 ,SS(3) ,  (IBRCH(3)+5), 0)
-
-! 430:[varrlc] Variable R, L or C  
-      CALL E_VARRLC1_CFG(0 ,SS(3) ,  (IBRCH(3)+4), 0)
-
-! 440:[tpflt] Three Phase Fault 
+! 400:[tpflt] Three Phase Fault 
       CALL E3PHFLT1_CFG(1000000.0,0.0)
 
-! 450:[varrlc] Variable R, L or C  
-      CALL E_VARRLC1_CFG(0 ,SS(2) ,  (IBRCH(2)+4), 0)
+! 420:[varrlc] Variable R, L or C  
+      CALL E_VARRLC1_CFG(0 ,SS(3) ,  (IBRCH(3)+6), 0)
+
+! 430:[varrlc] Variable R, L or C  
+      CALL E_VARRLC1_CFG(0 ,SS(3) ,  (IBRCH(3)+5), 0)
+
+! 440:[varrlc] Variable R, L or C  
+      CALL E_VARRLC1_CFG(0 ,SS(3) ,  (IBRCH(3)+4), 0)
+
+! 450:[tpflt] Three Phase Fault 
+      CALL E3PHFLT1_CFG(1000000.0,0.0)
 
 ! 460:[varrlc] Variable R, L or C  
-      CALL E_VARRLC1_CFG(0 ,SS(2) ,  (IBRCH(2)+5), 0)
+      CALL E_VARRLC1_CFG(0 ,SS(2) ,  (IBRCH(2)+4), 0)
 
 ! 470:[varrlc] Variable R, L or C  
+      CALL E_VARRLC1_CFG(0 ,SS(2) ,  (IBRCH(2)+5), 0)
+
+! 480:[varrlc] Variable R, L or C  
       CALL E_VARRLC1_CFG(0 ,SS(2) ,  (IBRCH(2)+6), 0)
 
-! 490:[breaker3] 3 Phase Breaker 'BRK'
+! 500:[breaker3] 3 Phase Breaker 'BRK'
       CALL COMPONENT_ID(ICALL_NO,525947723)
       RTCF(NRTCF) = ABS(0.0)
       NRTCF = NRTCF + 1
@@ -1102,26 +1108,28 @@
       IVD1_1 = NRTCF
       NRTCF  = NRTCF + 5
 
-! 150:[datamerge] Merges data signals into an array 
-
 ! 160:[datamerge] Merges data signals into an array 
 
 ! 170:[datamerge] Merges data signals into an array 
 
-! 180:[pgb] Output Channel 'I3'
+! 180:[datamerge] Merges data signals into an array 
 
-! 190:[consti] Integer Constant 
+! 190:[pgb] Output Channel 'I3'
+
+! 200:[pgb] Output Channel 'IL'
+
+! 210:[consti] Integer Constant 
       type1 = 0
 
-! 200:[consti] Integer Constant 
-      type2 = 9
+! 220:[consti] Integer Constant 
+      type2 = 0
 
-! 230:[consti] Integer Constant 
+! 250:[consti] Integer Constant 
       type3 = 0
 
-! 340:[pgb] Output Channel 'I2'
+! 360:[pgb] Output Channel 'I2'
 
-! 350:[pgb] Output Channel 'I1'
+! 370:[pgb] Output Channel 'I1'
 
       RETURN
       END
